@@ -9,7 +9,7 @@ global wowid
 WinGet, wowid, ID, World of Warcraft
 SetKeyDelay, 0
 
-global counter:=0 ; anti-afk
+global counter:=0
 
 global discord_id:=WinExist("ahk_exe Discord.exe")
 if !discord_id{
@@ -32,8 +32,8 @@ while enable
 {
   ifWinExist, ahk_id %wowid% 
   { 
-	; Wait 5 seconds before checking
-	Sleep, 5000
+	; Wait before checking
+	Sleep, 4000
 	
 	; Load discovered_unit variable and decide to alert the boys or continue scouting
 	ProcessIPCCmd()
@@ -50,14 +50,14 @@ while enable
 	counter++
 	
 	; Logout and back in to avoid random disconnects
-	if (Mod(counter,60) = 0 ){
+	if (Mod(counter,90) = 0 ){
 		SendCmd("/w Kekwmagew Logout: " . counter)
-		;Logout()
-		;Sleep, 32000
-		;ControlSend,, {enter}, ahk_id %wowid% 
-		;Sleep, 32000
+		Logout()
+		Sleep, 32000
+		ControlSend,, {enter}, ahk_id %wowid% 
+		Sleep, 32000
 	}
-	; Wait 5 seconds 
+	; Wait 
 	Sleep, 5000
   }
 }

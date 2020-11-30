@@ -14,11 +14,24 @@ ProcessIPCCmd(){
 	; Something on unitscan found	
 	;	alert the boys
 	; Ingame message
+	AlertIngame()
+	; Discord message
+	AlertDiscord()
+	Sleep, 240000
+	ExitApp
+	Sleep 100
+}
+
+AlertIngame(){
+	WinActivate, ahk_id %wowid%
+	Sleep, 1000
 	SendCmd("/w Kekwmagew Found Unit: " . cmd_str)
 	Sleep, 2000
 	SendCmd("/w Kekwmagew " . msg_guild . cmd_str)
 	Sleep, 2000
-	; Discord message
+}
+
+AlertDiscord(){
 	WinRestore, ahk_id %discord_id%
 	WinMaximize , ahk_id %discord_id%
 	WinActivate, ahk_id %discord_id%
@@ -28,9 +41,6 @@ ProcessIPCCmd(){
     SendDiscord(msg_discord . cmd_str) 
 	Sleep, 1000
     SendDiscord(msg_discord . cmd_str)
-	Sleep, 240000
-	ExitApp
-	Sleep 100
 }
 
 Logout(){

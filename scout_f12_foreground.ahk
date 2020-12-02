@@ -31,10 +31,7 @@ Scout:
 while enable
 {
   ifWinExist, ahk_id %wowid% 
-  { 
-	; Wait before checking
-	Sleep, 4000
-	
+  { 	
 	; Load discovered_unit variable and decide to alert the boys or continue scouting
 	ProcessIPCCmd()
 	
@@ -42,7 +39,7 @@ while enable
 	Sleep, 1000
 	
 	; Do a jump	
-	if (Mod(counter,6) = 0 ){
+	if (Mod(counter,12) = 0 ){ ; 6
 		ControlSend,, {Space}, ahk_id %wowid%	
 		Sleep, 2000
 	}
@@ -50,15 +47,24 @@ while enable
 	counter++
 	
 	; Logout and back in to avoid random disconnects
-	if (Mod(counter,90) = 0 ){
-		SendCmd("/w Kekwmagew Logout: " . counter)
+	if (Mod(counter,90) = 0 ){ ; 90
 		Logout()
-		Sleep, 32000
+		Sleep, 17000
+		if (is_rogue=1){
+			; unstealth
+			ControlSend,, 1, ahk_id %wowid% 
+		}
+		Sleep, 15000
 		ControlSend,, {enter}, ahk_id %wowid% 
-		Sleep, 32000
+		Sleep, %wait_loading_screen%		
+		if (is_rogue=1){
+			; stealth
+			ControlSend,, 1, ahk_id %wowid% 
+		}
 	}
-	; Wait 
-	Sleep, 5000
+	else {
+		Sleep, 10000
+	}	
   }
 }
 return

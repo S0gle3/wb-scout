@@ -2,7 +2,7 @@ ProcessIPCCmd(){
 	WinActivate, ahk_id %wowid%
     cmd_str:=GetCmdStr()
 	; Log found creature
-	if (log_ids = 1){
+	if (enable_log = 1){
 		MyLog(cmd_str)
 	}	
     if (cmd_str = "no_unit_found"){
@@ -11,36 +11,54 @@ ProcessIPCCmd(){
 	if (cmd_str = "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', unitscan_discovered_unit_name)" ){
 		return
 	}
-	; Something on unitscan found	
-	;	alert the boys
-	; Ingame message
-	AlertIngame()
-	; Discord message
-	AlertDiscord()
-	Sleep, 240000
+	unit_found:= cmd_str
+	; Check if NPC is allowed
+	if not (hasValue(whitelist_NPC, unit_found)){
+		return
+	}
+	; Found NPC on Whitelist
+	; Alert
+	Alert(unit_found)
 	ExitApp
-	Sleep 100
 }
 
-AlertIngame(){
+Alert(unit_found){	
+	AlertIngame(unit_found)
+	AlertDiscord(unit_found)
+}
+
+AlertIngame(unit_found){
 	WinActivate, ahk_id %wowid%
 	Sleep, 1000
-	SendCmd("/w Kekwmagew Found Unit: " . cmd_str)
-	Sleep, 2000
-	SendCmd("/w Kekwmagew " . msg_guild . cmd_str)
+	SendCmd("/guild " . msg_guild . unit_found)
 	Sleep, 2000
 }
 
-AlertDiscord(){
+SwitchChannel(discord_channel){
+	Send, ^k
+	SendDiscord(discord_channel)
+	Sleep, 2000
+	; Send escape twice in case already in correct channel
+	Send, {Esc}	
+	Send, {Esc}	
+}
+
+AlertDiscord(unit_found){
 	WinRestore, ahk_id %discord_id%
 	WinMaximize , ahk_id %discord_id%
 	WinActivate, ahk_id %discord_id%
+	Sleep, 3000	
+	SwitchChannel(discord_channel_bot)
 	Sleep, 1000
-	SendDiscord(msg_discord . cmd_str)
+	SendDiscord(msg_discord_bot_cmd_kazzak)
 	Sleep, 1000
-    SendDiscord(msg_discord . cmd_str) 
+	SwitchChannel(discord_channel_spam)
 	Sleep, 1000
-    SendDiscord(msg_discord . cmd_str)
+	Loop %n_spam%
+	{
+		SendDiscord(msg_discord . unit_found)
+		Sleep, spam_delay
+	}
 }
 
 Logout(){
@@ -53,10 +71,10 @@ Logout(){
 	}
 }
 
-SendDiscord(cmd_str){
-	clipboard := cmd_str
+SendDiscord(msg){
+	clipboard := msg
     Send, ^v
-    Sleep 200
+    Sleep 1000
     Send, {Enter}
 }
 
@@ -82,4 +100,15 @@ SendCmd(cmd_str){
  
 MyLog(str){
     FileAppend, [%A_DD%-%A_MM%-%A_Hour%:%A_Min%:%A_Sec%]: %str%`n, scout.log
+}
+
+hasValue(haystack, needle) {
+    if(!isObject(haystack))
+        return false
+    if(haystack.Length()==0)
+        return false
+    for k,v in haystack
+        if(v==needle)
+            return true
+    return false
 }

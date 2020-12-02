@@ -10,7 +10,7 @@ global wait_loading_screen:=26000				; time in ms to wait on character -> world 
 ; Discord spam
 global discord_channel_spam:="#scout-bot-spam"
 global msg_discord:="Discord this NPC spawned: " 
-global spam_delay:=1500 ; spam delay in ms 
+global spam_delay:=1000 ; spam delay in ms 
 global n_spam:=10	; number of messages to send		
 
 ; Discord bot

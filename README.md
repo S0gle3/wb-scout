@@ -1,10 +1,7 @@
 # scout
-This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has been found.
+This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has beenf ound.
 
-Find NPC -> check if it is a world boss -> write ingame guild chat -> open discord -> write 1 msg in channel 1 -> write n messages in channel 2 -> stop
-
-Running outside to reset
-[![Scout Thrall](http://img.youtube.com/vi/S86t6foMFnE/0.jpg)](http://www.youtube.com/watch?v=S86t6foMFnE "Scout Thrall")
+Streamable link https://streamable.com/qww8fe
 
 
 Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while actually AFKing. 
@@ -26,7 +23,7 @@ A. Character setup
 
 ## (optional) Macro setup
 Set `use_macros:=1` in `config.ahk`!
-Bind these macros to buttons 5 on your scout.
+Bind these macros to buttons 5 on your priest.
 
 5. Logout
 	```

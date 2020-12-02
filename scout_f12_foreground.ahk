@@ -13,8 +13,8 @@ global counter:=0
 
 global discord_id:=WinExist("ahk_exe Discord.exe")
 if !discord_id{
-	MsgBox, Discord not open;
-	ExitApp
+    MsgBox, Discord not open;
+    ExitApp
 }
 
 ^F12:: 
@@ -27,44 +27,44 @@ if (enable := !enable)
 return
 
 ; Scout Loop
-Scout: 									 
+Scout:                                      
 while enable
 {
   ifWinExist, ahk_id %wowid% 
-  { 	
-	; Load discovered_unit variable and decide to alert the boys or continue scouting
-	ProcessIPCCmd()
-	
-	; Sleep
-	Sleep, 1000
-	
-	; Do a jump	
-	if (Mod(counter,12) = 0 ){ ; 6
-		ControlSend,, {Space}, ahk_id %wowid%	
-		Sleep, 2000
-	}
-	
-	counter++
-	
-	; Logout and back in to avoid random disconnects
-	if (Mod(counter,90) = 0 ){ ; 90
-		Logout()
-		Sleep, 17000
-		if (is_rogue=1){
-			; unstealth
-			ControlSend,, 1, ahk_id %wowid% 
-		}
-		Sleep, 15000
-		ControlSend,, {enter}, ahk_id %wowid% 
-		Sleep, %wait_loading_screen%		
-		if (is_rogue=1){
-			; stealth
-			ControlSend,, 1, ahk_id %wowid% 
-		}
-	}
-	else {
-		Sleep, 10000
-	}	
+  {     
+    ; Load discovered_unit variable and decide to alert the boys or continue scouting
+    ProcessIPCCmd()
+    
+    ; Sleep
+    Sleep, 1000
+    
+    ; Do a jump    
+    if (Mod(counter,12) = 0 ){ ; 6
+        ControlSend,, {Space}, ahk_id %wowid%    
+        Sleep, 2000
+    }
+    
+    counter++
+    
+    ; Logout and back in to avoid random disconnects
+    if (Mod(counter,90) = 0 ){ ; 90
+        Logout()
+        Sleep, 17000
+        if (is_rogue=1){
+            ; unstealth
+            ControlSend,, 1, ahk_id %wowid% 
+        }
+        Sleep, 15000
+        ControlSend,, {enter}, ahk_id %wowid% 
+        Sleep, %wait_loading_screen%        
+        if (is_rogue=1){
+            ; stealth
+            ControlSend,, 1, ahk_id %wowid% 
+        }
+    }
+    else {
+        Sleep, 10000
+    }    
   }
 }
 return

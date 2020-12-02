@@ -4,7 +4,7 @@ global use_macros:=0                            ; if 1 uses macros 1-5 setup ins
 
 global is_rogue:=1 ; if 1 it sends 1 to press stealth when logging out/in
 
-global wait_loading_screen:=26000                ; time in ms to wait on character -> world loading screen
+global wait_loading_screen:=23000                ; time in ms to wait on character -> world loading screen
 
 ;============================================================================================================
 ; Discord spam

@@ -30,7 +30,8 @@ Alert(unit_found){
 AlertIngame(unit_found){
 	WinActivate, ahk_id %wowid%
 	Sleep, 1000
-	SendCmd("/guild " . msg_guild . unit_found)
+	SendCmd("/w Wubbs " . msg_guild . unit_found)
+	;SendCmd("/guild " . msg_guild . unit_found)
 	Sleep, 2000
 }
 

@@ -39,7 +39,7 @@ while enable
     Sleep, 1000
     
     ; Do a jump    
-    if (Mod(counter,12) = 0 ){ ; 6
+    if (Mod(counter,12) = 0 ){ ; 12
         ControlSend,, {Space}, ahk_id %wowid%    
         Sleep, 2000
     }
@@ -47,7 +47,7 @@ while enable
     counter++
     
     ; Logout and back in to avoid random disconnects
-    if (Mod(counter,90) = 0 ){ ; 90
+    if (Mod(counter,100) = 0 ){ ; 90
         Logout()
         Sleep, 17000
         if (is_rogue=1){
@@ -61,9 +61,10 @@ while enable
             ; stealth
             ControlSend,, 1, ahk_id %wowid% 
         }
+		Sleep, 1000
     }
     else {
-        Sleep, 10000
+        Sleep, 5000
     }    
   }
 }

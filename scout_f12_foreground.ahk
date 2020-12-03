@@ -31,12 +31,12 @@ Scout:
 while enable
 {
   ifWinExist, ahk_id %wowid% 
-  {     
+  {     	
     ; Load discovered_unit variable and decide to alert the boys or continue scouting
     ProcessIPCCmd()
     
     ; Sleep
-    Sleep, 1000
+    Sleep, 5000
     
     ; Do a jump    
     if (Mod(counter,12) = 0 ){ ; 12
@@ -61,7 +61,7 @@ while enable
             ; stealth
             ControlSend,, 1, ahk_id %wowid% 
         }
-		Sleep, 1000
+		Sleep, 1500
     }
     else {
         Sleep, 5000

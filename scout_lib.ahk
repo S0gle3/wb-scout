@@ -1,6 +1,7 @@
 ProcessIPCCmd(){
 	WinActivate, ahk_id %wowid%
     cmd_str:=GetCmdStr()
+	
 	; Log found creature
 	if (enable_log = 1){
 		MyLog(cmd_str)
@@ -19,6 +20,12 @@ ProcessIPCCmd(){
 	; Found NPC on Whitelist
 	; Alert
 	Alert(unit_found)
+	;
+	Sleep 5000
+	if (is_stay_logged_in=1){
+		WinActivate, ahk_id %wowid%
+		AntiAFKLoop()
+	}
 	ExitApp
 }
 
@@ -30,8 +37,7 @@ Alert(unit_found){
 AlertIngame(unit_found){
 	WinActivate, ahk_id %wowid%
 	Sleep, 1000
-	SendCmd("/w Wubbs " . msg_guild . unit_found)
-	;SendCmd("/guild " . msg_guild . unit_found)
+	SendCmd("/guild " . msg_guild . unit_found)
 	Sleep, 2000
 }
 
@@ -41,6 +47,7 @@ SwitchChannel(discord_channel){
 	Sleep, 2000
 	; Send escape twice in case already in correct channel
 	Send, {Esc}	
+	Sleep, 200
 	Send, {Esc}	
 }
 
@@ -51,7 +58,18 @@ AlertDiscord(unit_found){
 	Sleep, 3000	
 	SwitchChannel(discord_channel_bot)
 	Sleep, 1000
-	SendDiscord(msg_discord_bot_cmd_kazzak)
+	; Which bot to start channel
+	Switch unit_found
+	{
+		Case "AZUREGOS": 
+			SendDiscord(msg_discord_bot_cmd_azuregos)
+		Case "LORD KAZZAK":
+			SendDiscord(msg_discord_bot_cmd_kazzak)
+		Case "EMERISS", "YSONDRE", "TAERAR", "LETHON":
+			SendDiscord(msg_discord_bot_cmd_dragons)
+		Default: 
+			SendDiscord("Something went wrong setting up bot!")
+	}
 	Sleep, 1000
 	SwitchChannel(discord_channel_spam)
 	Sleep, 1000
@@ -82,9 +100,9 @@ SendDiscord(msg){
 GetCmdStr(){
     clipboard:="default_none"
 	SendCmd("/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', unitscan_discovered_unit_name)")
-    Sleep 500
+    Sleep 1000
     Send, ^c
-    Sleep 500
+    Sleep 1000
     Send, {Esc}
     cmd_str:=clipboard
     return  %cmd_str%
@@ -93,14 +111,46 @@ GetCmdStr(){
 SendCmd(cmd_str){
     clipboard := cmd_str
     Send, {Enter}
-    Sleep 200
+    Sleep 700
     Send, ^v
-    Sleep 200
+    Sleep 700
     Send, {Enter}
  }  
  
 MyLog(str){
     FileAppend, [%A_DD%-%A_MM%-%A_Hour%:%A_Min%:%A_Sec%]: %str%`n, scout.log
+}
+
+AntiAFKLoop(){
+	iterate:=0
+	while 1 {
+		ifWinExist, ahk_id %wowid%
+		{  
+			ControlSend,, {Space}, ahk_id %wowid%
+			Sleep, 2000
+			
+			WinActivate, ahk_id %wowid%
+			Sleep, 69000 
+			
+			iterate++
+			
+			if (Mod(iterate,11) = 0 ){
+				Logout()
+				Sleep, 17000
+				if (is_rogue=1){
+					; unstealth
+					ControlSend,, 1, ahk_id %wowid% 
+				}
+				Sleep, 15000
+				ControlSend,, {enter}, ahk_id %wowid% 
+				Sleep, %wait_loading_screen%        
+				if (is_rogue=1){
+					; stealth
+					ControlSend,, 1, ahk_id %wowid% 
+				}
+			}
+		}
+	}
 }
 
 hasValue(haystack, needle) {

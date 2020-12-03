@@ -56,21 +56,33 @@ AlertDiscord(unit_found){
 	WinMaximize , ahk_id %discord_id%
 	WinActivate, ahk_id %discord_id%
 	Sleep, 3000	
+
 	SwitchChannel(discord_channel_bot)
 	Sleep, 1000
 	; Which bot to start channel
-	Switch unit_found
-	{
-		Case "AZUREGOS": 
-			SendDiscord(msg_discord_bot_cmd_azuregos)
-		Case "LORD KAZZAK":
-			SendDiscord(msg_discord_bot_cmd_kazzak)
-		Case "EMERISS", "YSONDRE", "TAERAR", "LETHON":
-			SendDiscord(msg_discord_bot_cmd_dragons)
-		Default: 
-			SendDiscord("Something went wrong setting up bot!")
+	if (unit_found = "AZUREGOS"){
+		SendDiscord(msg_discord_bot_cmd_azuregos)
 	}
+	else if (unit_found = "LORD KAZZAK"){
+		SendDiscord(msg_discord_bot_cmd_kazzak)
+	}
+	else if (unit_found = "EMERISS"){
+		SendDiscord(msg_discord_bot_cmd_dragons)
+	}
+	else if (unit_found = "YSONDRE"){
+		SendDiscord(msg_discord_bot_cmd_dragons)
+	}
+	else if (unit_found = "TAERAR"){
+		SendDiscord(msg_discord_bot_cmd_dragons)
+	}
+	else if (unit_found = "LETHON"){
+		SendDiscord(msg_discord_bot_cmd_dragons)
+	}
+	else {
+		SendDiscord("Couldn't find bot command for unit: " . unit_found . "!")
+	}	
 	Sleep, 1000
+
 	SwitchChannel(discord_channel_spam)
 	Sleep, 1000
 	Loop %n_spam%

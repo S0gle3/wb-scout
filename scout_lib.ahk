@@ -26,6 +26,7 @@ ProcessIPCCmd(){
 		WinActivate, ahk_id %wowid%
 		AntiAFKLoop()
 	}
+	WinKill, ahk_id %wowid%
 	ExitApp
 }
 

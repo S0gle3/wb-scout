@@ -5,8 +5,6 @@ Streamable link: https://streamable.com/qww8fe
 
 Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while AFKing. 
 
-Every 30mins or so this script will logout your character for 1min to avoid random disconnects.
-
 ## Setup
 This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://streamable.com/qww8fe
 
@@ -67,6 +65,8 @@ Activate your WoW client with your scout character and press `F12` to start the 
 You can press F12 to disable the script but it will finish the scout loop. 
 
 Press CTRL+F12 to exit the script immediately.
+
+!Every 30mins or so this script will relog your character for 1min to avoid random disconnects.
 
 ## Notes
 This script will not alert you if you die.

@@ -71,7 +71,6 @@ Press CTRL+F12 to exit the script immediately.
 ## Notes
 This script will not alert you if you die.
 
-
 For details what I changed in unitscan: 2 minor changes to `unitscan.lua` from the Praxis discord. 
 in `unitscan.lua` on line 23 I added 
 

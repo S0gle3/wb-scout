@@ -5,6 +5,18 @@ This is how the demo version works with Hogger streamable link: https://streamab
 
 Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while AFKing. 
 
+## DEMO version vs MAIN version
+
+The demo version sends discord message to party chat and alerts the scout-bot-test-environment discord
+
+https://discord.gg/DXr2tAMvMG
+
+Do the setup once, then run demo version to try out the discord alerts and see how it works.
+
+Then you can run the main version when scouting world bosses 
+
+(optional) Remember to change config.ahk again if you changed it.
+
 ## Setup
 This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://streamable.com/qww8fe
 

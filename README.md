@@ -11,7 +11,22 @@ https://www.autohotkey.com/
 
 LibCopyPaste-1.0: https://www.curseforge.com/wow/addons/libcopypaste
 
-Modded unitscan. Download unitscan from discord somewhere and replace unitscan.lua with unitscan.lua
+Unzip the LibCopyPaste-1.0-v1.0.8-classic.zip and drag LibCopyPaste-* folder into your interface/addons then reload the game client to load the addon.
+
+Modified unitscan. Contains 2 minor changes to `unitscan.lua` from the Praxis discord. 
+in `unitscan.lua` on line 23 I added 
+
+```
+unitscan_discovered_unit_name = "no_unit_found"
+```
+
+in `unitscan.lua` on line 52 I added 
+
+```
+unitscan_discovered_unit_name = name
+```
+
+
 
 ## Performance
 Vulnerable to PVP in the open world. 

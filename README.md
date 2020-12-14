@@ -1,15 +1,13 @@
 # scout
-This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has beenf ound.
+This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has been found.
 
 Streamable link: https://streamable.com/qww8fe
 
-Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while actually AFKing. 
+Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while AFKing. 
 
-## Requirements
-https://www.autohotkey.com/
+Every 30mins or so this script will logout your character for 1min to avoid random disconnects.
 
-
-## Setup! 
+## Setup
 This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://streamable.com/qww8fe
 
 Step 1. Install autohotkey
@@ -19,7 +17,7 @@ Step 2. Install LibCopyPaste Addon
 LibCopyPaste-1.0: https://www.curseforge.com/wow/addons/libcopypaste
 
 I provived the classic `LibCopyPaste-1.0-v1.0.8-classic.zip` version in the folder. 
-Unzip the LibCopyPaste-1.0-v1.0.8-classic.zip and drag LibCopyPaste-* folder into your interface/addons then **reload the game client** to load the addon.
+Unzip the LibCopyPaste-1.0-v1.0.8-classic.zip and drag `/LibCopyPaste-1.0` folder into your interface/addons then **reload the game client** to load the addon.
 
 Does it work?
 Run this command ingame. If there's a prompt to accept custom scripts, click yes.
@@ -39,21 +37,16 @@ Run this command ingame. If it prints "nil" it is incorrect. If it prints "no_un
 /script print(unitscan_discovered_unit_name)
 ```
 
-For details what I changed in unitscan: 2 minor changes to `unitscan.lua` from the Praxis discord. 
-in `unitscan.lua` on line 23 I added 
+## (optional) Config.ahk
+A. Edit config file `config.ahk` to your liking. It works out of the box! 
 
-```
-unitscan_discovered_unit_name = "no_unit_found"
-```
+Each line has a comment saying what it does.
 
-in `unitscan.lua` on line 52 I added 
-
+These affect functionality so change these if needed
 ```
-unitscan_discovered_unit_name = name
+global is_rogue:=1 ; if 1 it sends 1 to press stealth when logging out/in
+global is_stay_logged_in:=0 ; if 1 runs AFK script after succesful scouting, if 0 closes the game client after alerting
 ```
-
-## Setup
-A. Edit config file `config.ahk` to your liking. It works out of the box. 
 
 ## (optional) Macro setup
 Set `use_macros:=1` in `config.ahk`!
@@ -67,12 +60,27 @@ Bind this macro to buttons 5 on your scout.
 	```
 
 ## Usage
-Activate your WoW client with your scout character and press `F12` to enable the script.
+Double-click `scout_f12_foreground.ahk` to load the script! It will show a confirm message if it's loaded.
+
+Activate your WoW client with your scout character and press `F12` to start the script.
 
 You can press F12 to disable the script but it will finish the scout loop. 
 
-Press CTRL+F12 to exit the script immediately
-
+Press CTRL+F12 to exit the script immediately.
 
 ## Notes
 This script will not alert you if you die.
+
+
+For details what I changed in unitscan: 2 minor changes to `unitscan.lua` from the Praxis discord. 
+in `unitscan.lua` on line 23 I added 
+
+```
+unitscan_discovered_unit_name = "no_unit_found"
+```
+
+in `unitscan.lua` on line 52 I added 
+
+```
+unitscan_discovered_unit_name = name
+```

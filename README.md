@@ -14,7 +14,7 @@ https://www.autohotkey.com/
 Step 2. Install LibCopyPaste Addon
 LibCopyPaste-1.0: https://www.curseforge.com/wow/addons/libcopypaste
 
-I provived the classic `LibCopyPaste-1.0-v1.0.8-classic.zip` version in the folder. 
+I provided the classic `LibCopyPaste-1.0-v1.0.8-classic.zip` version in the folder. 
 Unzip the LibCopyPaste-1.0-v1.0.8-classic.zip and drag `/LibCopyPaste-1.0` folder into your interface/addons then **reload the game client** to load the addon.
 
 Does it work?

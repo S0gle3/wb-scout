@@ -1,7 +1,7 @@
 # scout
 This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has been found.
 
-Streamable link: https://streamable.com/qww8fe
+This is how the demo version works with Hogger streamable link: https://streamable.com/qww8fe
 
 Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while AFKing. 
 

@@ -1,17 +1,35 @@
 ProcessIPCCmd(){
-	WinActivate, ahk_id %wowid%
-    cmd_str:=GetCmdStr()
-	
-	; Log found creature
+	command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (UnitIsDeadOrGhost('player') and 'UnitIsDeadOrGhost' or unitscan_discovered_unit_name))"
+	; in combat?
+	;  	yes -> "UnitAffectingCombat"
+	; 	no -> am i ghost or dead?
+	;		yes -> "UnitIsDeadOrGhost"
+	;		no -> unitscan_discovered_unit_name
+
+    cmd_str:=GetCmdStr(command_str)	
+	; Log cmd_str
 	if (enable_log = 1){
 		MyLog(cmd_str)
 	}	
-    if (cmd_str = "no_unit_found"){
-        return
-    }
-	if (cmd_str = "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', unitscan_discovered_unit_name)" ){
+	if (cmd_str = "no_unit_found"){
 		return
 	}
+	if (cmd_str = command_str){
+		return
+	}
+    if (cmd_str = "UnitAffectingCombat"){
+		AlertDiscordCompromised("In Combat")
+		Sleep 18000
+		ExitApp	
+        return
+    }
+	if (cmd_str = "UnitIsDeadOrGhost"){
+		AlertDiscordCompromised("Is Dead or Ghost")
+		Sleep 18000
+		ExitApp	
+        return
+    }
+
 	unit_found:= cmd_str
 	; Check if NPC is allowed
 	if not (hasValue(whitelist_NPC, unit_found)){
@@ -27,8 +45,9 @@ ProcessIPCCmd(){
 		AntiAFKLoop()
 	}
 	WinKill, ahk_id %wowid%
-	ExitApp
+	ExitApp	
 }
+
 
 Alert(unit_found){	
 	AlertIngame(unit_found)
@@ -91,6 +110,17 @@ AlertDiscord(unit_found){
 		SendDiscord(msg_discord . unit_found)
 		Sleep, spam_delay
 	}
+}
+
+AlertDiscordCompromised(status) {
+	WinRestore, ahk_id %discord_id%
+	WinMaximize , ahk_id %discord_id%
+	WinActivate, ahk_id %discord_id%
+	Sleep, 3000	
+
+	SwitchChannel(discord_channel_spam)
+	Sleep, 1000
+	SendDiscord(msg_discord_scout_compromised . status)
 }
 
 Logout(){

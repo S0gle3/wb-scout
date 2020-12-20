@@ -1,3 +1,5 @@
+; Feel free to edit any of these
+;===========================================================================================================
 global enable_log:=1                            ; if 1 writes to a log file, 0 to disable
 
 global use_macros:=0                           ; if 1 uses macros bound to 1 and 5, instead of typing commands, 0 to disable
@@ -5,7 +7,7 @@ global use_macros:=0                           ; if 1 uses macros bound to 1 and
 global is_rogue:=1 ; if 1 it sends 1 to press stealth when logging out/in
 global is_stay_logged_in:=0 ; if 1 runs AFK script after succesful scouting, if 0 closes the game client after alerting
 
-global wait_loading_screen:=21000                ; time in ms to wait on character -> world loading screen
+global wait_loading_screen:=18000                ; time in ms to wait on character -> world loading screen
 
 ;============================================================================================================
 ; Discord spam
@@ -19,6 +21,9 @@ global discord_channel_bot:="#scout-bot-channel"
 global msg_discord_bot_cmd_azuregos:="start bot azuregos" 
 global msg_discord_bot_cmd_kazzak:="start bot kazzak" 
 global msg_discord_bot_cmd_dragons:="start bot dragons" 
+
+; Discord scout compromised
+global msg_discord_scout_compromised:="Scout compromised? Status: "  
 
 ; Ingame
 global msg_guild:="World Boss spawned: "

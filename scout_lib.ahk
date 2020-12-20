@@ -140,9 +140,10 @@ SendDiscord(msg){
     Send, {Enter}
 }
 
-GetCmdStr(){
+GetCmdStr(cmd){
+	WinActivate, ahk_id %wowid%
     clipboard:="default_none"
-	SendCmd("/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', unitscan_discovered_unit_name)")
+	SendCmd(cmd)
     Sleep 1000
     Send, ^c
     Sleep 1000
@@ -150,6 +151,7 @@ GetCmdStr(){
     cmd_str:=clipboard
     return  %cmd_str%
 }
+
 
 SendCmd(cmd_str){
     clipboard := cmd_str

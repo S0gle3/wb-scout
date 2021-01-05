@@ -1,3 +1,5 @@
+global repeated_fail_count:=0 
+
 ProcessIPCCmd(){
 	command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (UnitIsDeadOrGhost('player') and 'UnitIsDeadOrGhost' or unitscan_discovered_unit_name))"
 	; in combat?
@@ -11,10 +13,20 @@ ProcessIPCCmd(){
 	if (enable_log = 1){
 		MyLog(cmd_str)
 	}	
-	if (cmd_str = "no_unit_found"){
+	if (cmd_str = command_str){
+		; disconnect check
+		; multiple returns of this = bot disconnected
+		repeated_fail_count := repeated_fail_count + 1
+		if (repeated_fail_count >= 6){
+			AlertDiscordCompromised("Disconnected")
+			Sleep 18000
+			ExitApp	
+		}	
 		return
 	}
-	if (cmd_str = command_str){
+	repeated_fail_count := 0
+	
+	if (cmd_str = "no_unit_found"){
 		return
 	}
     if (cmd_str = "UnitAffectingCombat"){

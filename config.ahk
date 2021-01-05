@@ -17,10 +17,10 @@ global spam_delay:=1000 ; spam delay in ms
 global n_spam:=4    ; number of messages to send        
 
 ; Discord bot
-global discord_channel_bot:="#scout-bot-channel"
-global msg_discord_bot_cmd_azuregos:="start bot azuregos" 
-global msg_discord_bot_cmd_kazzak:="start bot kazzak" 
-global msg_discord_bot_cmd_dragons:="start bot dragons" 
+global discord_channel_bot:="#bot-pings"
+global msg_discord_bot_cmd_azuregos:="!startevent azure" 
+global msg_discord_bot_cmd_kazzak:="!startevent kazzak" 
+global msg_discord_bot_cmd_dragons:="!startevent four" 
 
 ; Discord scout compromised
 global msg_discord_scout_compromised:="Scout compromised? Status: "  

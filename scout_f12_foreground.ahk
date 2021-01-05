@@ -67,5 +67,12 @@ while enable
         Sleep, 5000
     }    
   }
+  else
+  {
+	Sleep 1000
+	AlertDiscordCompromised("Client closed")
+	Sleep 18000  
+	ExitApp  
+  }
 }
 return

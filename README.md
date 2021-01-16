@@ -1,21 +1,21 @@
 # scout
 This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has been found.
 
-This is how the demo version works with Hogger streamable link: https://streamable.com/qww8fe
-
+Libcopypaste: This is how the demo version works with Hogger streamable link: https://streamable.com/qww8fe
 Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while AFKing. 
 
-## DEMO version vs MAIN version
+Square: Move cursor to WA square, press F10 to record square position and F12 to start
+Does NOT require keyboard control or focus. It does require the square to be visible
 
-The demo version sends discord message to party chat and alerts the scout-bot-test-environment discord
+## TEST version vs MAIN version
+
+The test version sends discord message to party chat and alerts the scout-bot-test-environment discord
 
 https://discord.gg/DXr2tAMvMG
 
 Do the setup once, then run demo version to try out the discord alerts and see how it works.
 
-Then you can run the main version when scouting world bosses 
-
-(optional) Remember to change config.ahk again if you changed it.
+global test_mode:=1 is enabled by default. Set to 0 when scouting world bosses
 
 ## Setup
 This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://streamable.com/qww8fe
@@ -23,7 +23,7 @@ This video shows the demo version and gives you an idea of how it should look li
 Step 1. Install autohotkey
 https://www.autohotkey.com/
 
-Step 2. Install LibCopyPaste Addon
+(libcopypaste) Step 2. Install LibCopyPaste Addon
 LibCopyPaste-1.0: https://www.curseforge.com/wow/addons/libcopypaste
 
 I provided the classic `LibCopyPaste-1.0-v1.0.8-classic.zip` version in the folder. 
@@ -36,6 +36,11 @@ This should popup a window with some text.
 /run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Install sucess', "LibCopyPaste installed successfully")
 ```
 
+(square prefered method) Step 2. Install Weakaura https://wago.io/X63V8KRyn
+or in WA_square.text
+
+You must bind /logout to 5. See macro setup below
+
 Step 3. Modify unitscan.lua 
 I use a modified `unitscan.lua` file. 
 
@@ -47,7 +52,7 @@ Run this command ingame. If it prints "nil" it is incorrect. If it prints "no_un
 /script print(unitscan_discovered_unit_name)
 ```
 
-## (optional) Config.ahk
+## Config.ahk
 A. Edit config file `config.ahk` to your liking. It works out of the box! 
 
 Each line has a comment saying what it does.
@@ -58,7 +63,11 @@ global is_rogue:=1 ; if 1 it sends 1 to press stealth when logging out/in
 global is_stay_logged_in:=0 ; if 1 runs AFK script after succesful scouting, if 0 closes the game client after alerting
 ```
 
-## (optional) Macro setup
+Test mode is enabled by default. So try out the bot then change it to 0 before actually running it.
+```
+global test_mode:=1 
+```
+## Macro setup
 Set `use_macros:=1` in `config.ahk`!
 Bind this macro to buttons 5 on your scout.
 

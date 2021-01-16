@@ -112,7 +112,8 @@ ProcessSquare(){
 	}
 	; Found NPC on Whitelist
 	; Alert
-	Alert(unit_found)
+	AlertIngame(unit_found)
+	AlertDiscord(unit_found)
 	;
 	Sleep 5000
 	if (test_mode = 1){
@@ -123,8 +124,8 @@ ProcessSquare(){
 	if (is_stay_logged_in=1){
 		Sleep 60000
 	}
-	;WinKill, ahk_id %wowid%
-	;ExitApp	
+	WinKill, ahk_id %wowid%
+	ExitApp	
 	
 }
 
@@ -186,20 +187,16 @@ ProcessIPCCmd(){
 	}
 	; Found NPC on Whitelist
 	; Alert
-	Alert(unit_found)
+	AlertIngame(unit_found)
+	AlertDiscord(unit_found)
 	;
 	Sleep 5000
 	if (is_stay_logged_in=1){
 		Sleep 60000
+		AntiAFKLoop()
 	}
 	WinKill, ahk_id %wowid%
 	ExitApp	
-}
-
-
-Alert(unit_found){	
-	AlertIngame(unit_found)
-	AlertDiscord(unit_found)
 }
 
 AlertIngame(unit_found){
@@ -209,8 +206,7 @@ AlertIngame(unit_found){
 		SendCmd("/party " . msg_guild . unit_found)
 	}
 	else {
-		; SendCmd("/guild " . msg_guild . unit_found)
-		SendCmd("/w Wubbs " . msg_guild . unit_found)
+		SendCmd("/guild " . msg_guild . unit_found)
 	}
 	Sleep, 2000
 }

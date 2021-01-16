@@ -11,20 +11,18 @@ global wait_loading_screen:=18000                ; time in ms to wait on charact
 
 global use_libcopypaste:=0 ; if 1 uses libcoypaste, requires active wow client, if 0 uses WA square instead
 
-global test_mode:=1 ; if 1 alerts party chat and test discord
+global test_mode:=1 ; if 1 alerts party chat, test discord, less waits
 
 
 ;============================================================================================================
 ; Discord spam
-; global discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
-global discord_channel_spam:="#scout-bot-spom"
+global discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 global msg_discord:="World Boss spawned: " 
 global spam_delay:=1000 ; spam delay in ms 
 global n_spam:=1    ; number of messages to send        
 
 ; Discord bot
-; global discord_channel_bot:="#bot-pings"
-global discord_channel_bot:="#scout-bot-channol"
+global discord_channel_bot:="#bot-pings"
 
 global msg_discord_bot_cmd_azuregos:="!startevent azure" 
 global msg_discord_bot_cmd_kazzak:="!startevent kazzak" 

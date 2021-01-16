@@ -1,4 +1,75 @@
+ColorToSymbol(color){	
+	if (color <= 40){
+		return 0
+	}
+	else if (color <= 80){
+		return 1
+	}	
+	else if (color <= 120){
+		return 2
+	}	
+	else if (color <= 160){
+		return 3
+	}	
+	else if (color <= 200){
+		return 4
+	}	
+	else {
+		return 5
+	}		
+}
+; Capped at 120ish elements
+global decode_table:={544: "AZUREGOS"
+					, 545: "LORD KAZZAK"
+					, 550: "EMERISS"
+					, 551: "YSONDRE"
+					, 552: "TAERAR"
+					, 553: "LETHON"
+					, 514: "DOOM LORD KAZZAK"
+					, 515: "DOOMWALKER"
+					, 451: "DEAD"
+					, 452: "GHOST"
+					, 453: "COMBAT"
+					}
+
+SymbolToDecode(S1, S2, S3){
+	key:= S1 . S2 . S3
+	val:= decode_table[(key)]
+	if (val == "") {
+		return "nil"
+	}
+	else {
+		return val
+	}
+}
 global repeated_fail_count:=0 
+
+ReadSquareColor(x,y){
+	PixelGetColor, color, x, y, RGB	
+	; MsgBox The color at the current cursor position is %color%.
+	; Seperate RGB into range (0-255)
+	b := (color & 0xFF)
+	g := ((color & 0xFF00) >> 8)
+	r := ((color & 0xFF0000) >> 16)	
+	return {"red": r, "green": g, "blue": b} 
+}
+
+GetSquareValue(x,y){
+	colors := ReadSquareColor(x, y)	
+	s_red := ColorToSymbol(colors.red)
+	s_green := ColorToSymbol(colors.green)
+	s_blue := ColorToSymbol(colors.blue)
+	val := SymbolToDecode(s_red, s_green, s_blue)
+	if (enable_log = 1){
+		MyLog(Format("colors R: {} G: {} B: {} SR: {} SG: {} SB: {} key: {} val: {}", colors.red, colors.green, colors.blue, s_red, s_green, s_blue, s_red . s_green . s_blue, val))
+	}		
+	return val
+}
+
+ProcessSquare(){
+	val := GetSquareValue(square_x, square_y)		
+	; if nil -> square not set -> add fail count?
+}
 
 ProcessIPCCmd(){
 	command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (UnitIsDeadOrGhost('player') and 'UnitIsDeadOrGhost' or unitscan_discovered_unit_name))"

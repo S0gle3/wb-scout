@@ -48,20 +48,23 @@ while enable
 		ProcessSquare()
 	}
 	
-	    ; Do a jump    
+	; Do a jump    
     if (Mod(counter,12) = 0 ){ ; 12
         ControlSend,, {Space}, ahk_id %wowid%    
         Sleep, 2000
     }
     
     ; Sleep
-    Sleep, 1000
-   
-    
+	if (test_mode = 1){
+		Sleep, 100
+	}
+	else {
+		Sleep, 1000
+	}    
     counter++
     
     ; Logout and back in to avoid random disconnects
-    if (Mod(counter,100) = 0 ){ ; 90
+    if (test_mode = 0 and Mod(counter,100) = 0 ){ ; 90
         Logout()
         Sleep, 17000
         if (is_rogue=1){
@@ -91,7 +94,7 @@ while enable
   else
   {
 	Sleep 1000
-	;AlertDiscordCompromised("Client closed")
+	AlertDiscordCompromised("Client closed")
 	Sleep 18000  
 	ExitApp  
   }

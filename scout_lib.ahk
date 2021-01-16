@@ -28,9 +28,8 @@ global decode_table:={544: "AZUREGOS"
 					, 514: "DOOM LORD KAZZAK"
 					, 515: "DOOMWALKER"
 					, 451: "DEAD"
-					, 452: "GHOST"
-					, 453: "COMBAT"
-					}
+					, 452: "WORKING"
+					, 453: "COMBAT"}
 
 SymbolToDecode(S1, S2, S3){
 	key:= S1 . S2 . S3
@@ -69,6 +68,64 @@ GetSquareValue(x,y){
 ProcessSquare(){
 	val := GetSquareValue(square_x, square_y)		
 	; if nil -> square not set -> add fail count?
+	if (enable_log = 1){
+		MyLog(val)
+	}	
+	if (val = "nil"){
+		; disconnect check
+		; multiple returns of this = bot disconnected
+		repeated_fail_count := repeated_fail_count + 1
+		if (repeated_fail_count >= 6){
+			AlertDiscordCompromised("Disconnected")
+			Sleep 18000
+			ExitApp	
+		}	
+		return
+	}
+	repeated_fail_count := 0
+	
+	if (val = "WORKING"){
+		return
+	}
+    if (val = "COMBAT"){
+		AlertDiscordCompromised("In Combat")
+		if (test_mode = 1){
+			return
+		}
+		Sleep 18000
+		ExitApp	
+        return
+    }
+	if (val = "DEAD"){
+		AlertDiscordCompromised("Is Dead or Ghost")
+		if (test_mode = 1){
+			return
+		}
+		Sleep 18000
+		ExitApp	
+        return
+    }
+	unit_found:= val
+	; Check if NPC is allowed
+	if not (hasValue(whitelist_NPC, unit_found)){
+		return
+	}
+	; Found NPC on Whitelist
+	; Alert
+	Alert(unit_found)
+	;
+	Sleep 5000
+	if (test_mode = 1){
+		WinActivate, ahk_id %wowid%
+		Sleep 1000
+		return
+	}
+	if (is_stay_logged_in=1){
+		Sleep 60000
+	}
+	;WinKill, ahk_id %wowid%
+	;ExitApp	
+	
 }
 
 ProcessIPCCmd(){
@@ -90,6 +147,9 @@ ProcessIPCCmd(){
 		repeated_fail_count := repeated_fail_count + 1
 		if (repeated_fail_count >= 6){
 			AlertDiscordCompromised("Disconnected")
+			if (test_mode = 1){
+				return
+			}
 			Sleep 18000
 			ExitApp	
 		}	
@@ -102,12 +162,18 @@ ProcessIPCCmd(){
 	}
     if (cmd_str = "UnitAffectingCombat"){
 		AlertDiscordCompromised("In Combat")
+		if (test_mode = 1){
+			return
+		}
 		Sleep 18000
 		ExitApp	
         return
     }
 	if (cmd_str = "UnitIsDeadOrGhost"){
 		AlertDiscordCompromised("Is Dead or Ghost")
+		if (test_mode = 1){
+			return
+		}
 		Sleep 18000
 		ExitApp	
         return
@@ -124,8 +190,7 @@ ProcessIPCCmd(){
 	;
 	Sleep 5000
 	if (is_stay_logged_in=1){
-		WinActivate, ahk_id %wowid%
-		AntiAFKLoop()
+		Sleep 60000
 	}
 	WinKill, ahk_id %wowid%
 	ExitApp	
@@ -140,7 +205,13 @@ Alert(unit_found){
 AlertIngame(unit_found){
 	WinActivate, ahk_id %wowid%
 	Sleep, 1000
-	SendCmd("/guild " . msg_guild . unit_found)
+	if (test_mode = 1){
+		SendCmd("/party " . msg_guild . unit_found)
+	}
+	else {
+		; SendCmd("/guild " . msg_guild . unit_found)
+		SendCmd("/w Wubbs " . msg_guild . unit_found)
+	}
 	Sleep, 2000
 }
 

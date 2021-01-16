@@ -41,7 +41,7 @@ while enable
   ifWinExist, ahk_id %wowid% 
   {
 	val := GetSquareValue(square_x, square_y)
-	MsgBox,, Square Test Mode, UNIT_FOUND: %val% 	
+	MsgBox,, Square Test Mode, TEXT: %val% 	
     counter++
   }
 }

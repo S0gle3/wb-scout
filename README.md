@@ -6,6 +6,8 @@ Requires keyboard control, running discord and activated wow client. So must be 
 
 Square: Move cursor to WA square, press F10 to record square position and F12 to start
 Does NOT require keyboard control or focus. It does require the square to be visible
+Square streamable https://streamable.com/9qcmoq
+
 
 ## TEST version vs MAIN version
 

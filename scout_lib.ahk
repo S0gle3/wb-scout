@@ -173,8 +173,20 @@ AntiAFKLoop(){
 	while 1 {
 		ifWinExist, ahk_id %wowid%
 		{  
-			ControlSend,, {Space}, ahk_id %wowid%
-			Sleep, 2000
+			if (is_rogue=1){
+				ControlSend,, {Space}, ahk_id %wowid%    
+				Sleep, 2000
+			}
+			else {
+				ControlSend,, {a down}, ahk_id %wowid%
+				Sleep 500
+				ControlSend,, {a up}, ahk_id %wowid%
+				Sleep 500
+				ControlSend,, {d down}, ahk_id %wowid%
+				Sleep 500
+				ControlSend,, {d up}, ahk_id %wowid%
+				Sleep 500
+			}
 			
 			WinActivate, ahk_id %wowid%
 			Sleep, 69000 

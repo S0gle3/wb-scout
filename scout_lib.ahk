@@ -29,12 +29,14 @@ ProcessIPCCmd(){
 	if (cmd_str = "no_unit_found"){
 		return
 	}
-    if (cmd_str = "UnitAffectingCombat"){
-		AlertDiscordCompromised("In Combat")
-		Sleep 18000
-		ExitApp	
-        return
-    }
+	if (cmd_str = "UnitAffectingCombat"){
+		if (is_rogue=1){
+			AlertDiscordCompromised("In Combat")
+			Sleep 18000
+			ExitApp	
+			return
+		}
+	}
 	if (cmd_str = "UnitIsDeadOrGhost"){
 		AlertDiscordCompromised("Is Dead or Ghost")
 		Sleep 18000

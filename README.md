@@ -26,8 +26,8 @@ https://www.autohotkey.com/
 Step 2. Install LibCopyPaste Addon
 LibCopyPaste-1.0: https://www.curseforge.com/wow/addons/libcopypaste
 
-I provided the classic `LibCopyPaste-1.0-v1.0.8-classic.zip` version in the folder. 
-Unzip the LibCopyPaste-1.0-v1.0.8-classic.zip and drag `/LibCopyPaste-1.0` folder into your interface/addons then **reload the game client** to load the addon.
+I provided the classic `LibCopyPaste-1.0-v1.0.10-classic.zip` version in the folder. 
+Unzip the LibCopyPaste-1.0-v1.0.10-classic.zip and drag `/LibCopyPaste-1.0` folder into your interface/addons then **reload the game client** to load the addon.
 
 Does it work?
 Run this command ingame. If there's a prompt to accept custom scripts, click yes.
@@ -84,13 +84,13 @@ Press CTRL+F12 to exit the script immediately.
 This script will not alert you if you die.
 
 For details what I changed in unitscan: 2 minor changes to `unitscan.lua` from the Praxis discord. 
-in `unitscan.lua` on line 23 I added 
+in `unitscan.lua` added 
 
 ```
 unitscan_discovered_unit_name = "no_unit_found"
 ```
 
-in `unitscan.lua` on line 52 I added 
+in `unitscan.lua` added 
 
 ```
 unitscan_discovered_unit_name = name

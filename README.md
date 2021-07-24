@@ -5,20 +5,20 @@ This is how the demo version works with Hogger streamable link: https://streamab
 
 Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while AFKing. 
 
-## DEMO version vs MAIN version
+## DEMO mode vs MAINmode 
+The demo version sends discord message to party chat and alerts the Sogla's AHK Scout Bot Test Discord discord
 
-The demo version sends discord message to party chat and alerts the scout-bot-test-environment discord
-
-https://discord.gg/DXr2tAMvMG
+https://discord.gg/FvMxSR9w2j
 
 Do the setup once, then run demo version to try out the discord alerts and see how it works.
 
-Then you can run the main version when scouting world bosses 
-
-(optional) Remember to change config.ahk again if you changed it.
+Then you can run the main version when scouting world bosses by changing value 1 to 0. 
+```
+enable_demo_mode := 0 ; Sends alerts to guild chat and main discord
+```
 
 ## Setup
-This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://streamable.com/qww8fe
+This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://streamable.com/qww8fe (needs updating)
 
 Step 1. Install autohotkey
 https://www.autohotkey.com/
@@ -36,7 +36,7 @@ This should popup a window with some text.
 /run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Install sucess', "LibCopyPaste installed successfully")
 ```
 
-Step 3. Modify unitscan.lua 
+Step 3. Modify unitscan - unitscan.lua 
 I use a modified `unitscan.lua` file. 
 
 For simplicity sake I included my entire `/unitscan` folder so you can copy-paste replace everything!

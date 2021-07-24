@@ -17,7 +17,7 @@ global num_cycles_movement = 12
 global sleep_cycle_duration = 5000
 if (enable_demo_mode = 1){
     num_cycles_movement = 3
-    sleep_cycle_duration = 1500
+    sleep_cycle_duration = 1000
 }
 
 ;============================================================================================================

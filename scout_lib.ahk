@@ -51,7 +51,9 @@ ProcessIPCCmd(){
 	unit_found:= cmd_str
 	; Check if NPC is allowed
 	if not (hasValue(whitelist_NPC, unit_found)){
-		return
+		if (enable_demo_mode = 0){ ; Only whitelist when not doing demo
+			return
+		}
 	}
 	; Found NPC on Whitelist
 	AlertDiscord(unit_found)
@@ -69,7 +71,7 @@ ProcessIPCCmd(){
 AlertIngame(message){
 	WinActivate, ahk_id %wowid%
 	Sleep, 1000
-	SendCmd("/w Sogla " . msg_guild . message)
+	SendCmd(msg_ingame . message)
 	Sleep, 2000
 }
 

@@ -1,5 +1,8 @@
 ; Feel free to edit any of these
 ;===========================================================================================================
+global enable_demo_mode:= 1                     ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
+                                                ; if 0 writes to praxis discord
+
 global enable_log:=1                            ; if 1 writes to a log file, 0 to disable
 
 global use_macros:=0                           ; if 1 uses macros bound to 1 and 5, instead of typing commands, 0 to disable
@@ -9,15 +12,30 @@ global is_stay_logged_in:=1 ; if 1 runs AFK script after succesful scouting, if 
 
 global wait_loading_screen:=18000                ; time in ms to wait on character -> world loading screen
 
+;Timing
+global num_cycles_movement = 12
+global sleep_cycle_duration = 5000
+if (enable_demo_mode = 1){
+    num_cycles_movement = 3
+    sleep_cycle_duration = 1500
+}
+
 ;============================================================================================================
 ; Discord spam
-global discord_channel_spam:="ahk-test-coordination" ; "#coordination world" as to not confuse with warchief coordination
+global discord_channel_spam:="ahk-test-coordination"
+if (enable_demo_mode = 0){
+    discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
+}
+;global discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 global msg_discord:="World Boss spawned: " 
 global spam_delay:=1000 ; spam delay in ms 
 global n_spam:=4    ; number of messages to send        
 
 ; Discord bot
 global discord_channel_bot:="#ahk-test-bot-pings"
+if (enable_demo_mode = 0){
+    discord_channel_bot:="#bot-pings"
+}
 global msg_discord_bot_cmd_doomwalker:="!startevent doomwalker" 
 global msg_discord_bot_cmd_kazzak:="!startevent kazzak" 
 
@@ -25,8 +43,11 @@ global msg_discord_bot_cmd_kazzak:="!startevent kazzak"
 global msg_discord_scout_compromised:="Scout compromised? Status: "  
 
 ; Ingame
-global msg_guild:="SCOUT: "
+global msg_ingame:="/w Sogla TEST_SCOUT: " ; must have space at the end
+if (enable_demo_mode = 0){
+   msg_ingame:="/guild SCOUT: "
+}
 
 ;============================================================================================================
 ; Approved unitscan NPCs
-global whitelist_NPC :=["DOOMWALKER" ,"DOOM LORD KAZZAK"]
+global whitelist_NPC :=["DOOMWALKER" ,"DOOM LORD KAZZAK"] ; ALL CAPS

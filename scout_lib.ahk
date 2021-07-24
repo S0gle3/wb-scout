@@ -54,7 +54,6 @@ ProcessIPCCmd(){
 		return
 	}
 	; Found NPC on Whitelist
-	; Alert
 	AlertDiscord(unit_found)
 	;
 	Sleep 5000

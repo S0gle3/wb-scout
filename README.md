@@ -63,11 +63,11 @@ Set `use_macros:=1` in `config.ahk`!
 Bind this macro to buttons 5 on your scout.
 
 5. Logout
-	```
-		/p Relogging on purpose. Brb in 1min
-		/raid Relogging on purpose. Brb in 1min
-		/logout
-	```
+    ```
+        /p Relogging on purpose. Brb in 1min
+        /raid Relogging on purpose. Brb in 1min
+        /logout
+    ```
 
 ## Usage
 Double-click `scout_f12_foreground.ahk` to load the script! It will show a confirm message if it's loaded.

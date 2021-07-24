@@ -73,7 +73,7 @@ while enable
             ; stealth
             ControlSend,, 1, ahk_id %wowid% 
         }
-		Sleep, 1500
+    Sleep, 1500
     }
     else {
         Sleep, sleep_cycle_duration
@@ -81,10 +81,10 @@ while enable
   }
   else
   {
-	Sleep 1000
-	AlertDiscordCompromised("Client closed")
-	Sleep 18000  
-	ExitApp  
+  Sleep 1000
+  AlertDiscordCompromised("Client closed")
+  Sleep 18000  
+  ExitApp  
   }
 }
 return

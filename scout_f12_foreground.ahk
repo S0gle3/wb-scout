@@ -40,8 +40,14 @@ while enable
     
     ; Do a jump    
     if (Mod(counter,12) = 0 ){ ; 12
-        ControlSend,, {Space}, ahk_id %wowid%    
-        Sleep, 2000
+        ControlSend,, {a down}, ahk_id %wowid%
+        Sleep 500
+        ControlSend,, {a up}, ahk_id %wowid%
+        Sleep 500
+        ControlSend,, {d down}, ahk_id %wowid%
+        Sleep 500
+        ControlSend,, {d up}, ahk_id %wowid%
+        Sleep 500
     }
     
     counter++

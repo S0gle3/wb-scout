@@ -51,6 +51,8 @@ while enable
         Sleep 500
         ControlSend,, {d down}, ahk_id %wowid%
         Sleep 500
+        ControlSend,, {d up}, ahk_id %wowid%
+        Sleep 500
       }
     }
     

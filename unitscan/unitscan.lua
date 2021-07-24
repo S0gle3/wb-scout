@@ -10,6 +10,9 @@ local has_alert = false
 local guild_announce = false
 local boss = nil
 
+-- Global var for AHK mod
+unitscan_discovered_unit_name = "no_unit_found"
+
 unitscan:SetScript('OnUpdate', function() unitscan.UPDATE() end)
 unitscan:SetScript('OnEvent', function(_, event, arg1)
 	if event == 'ADDON_LOADED' and arg1 == 'unitscan' then
@@ -86,6 +89,7 @@ function unitscan.target(name)
 			unitscan.play_sound()
 			unitscan.flash.animation:Play()
 			unitscan.discovered_unit = name
+			unitscan_discovered_unit_name = name -- AHK mod
 			unitscan.alert()
 			started = false
 		end

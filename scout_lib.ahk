@@ -93,23 +93,11 @@ AlertDiscord(unit_found){
 	SwitchChannel(discord_channel_bot)
 	Sleep, 1000
 	; Which bot to start channel
-	if (unit_found = "AZUREGOS"){
-		SendDiscord(msg_discord_bot_cmd_azuregos)
+	if (unit_found = "DOOMWALKER"){
+		SendDiscord(msg_discord_bot_cmd_doomwalker)
 	}
-	else if (unit_found = "LORD KAZZAK"){
+	else if (unit_found = "DOOM LORD KAZZAK"){
 		SendDiscord(msg_discord_bot_cmd_kazzak)
-	}
-	else if (unit_found = "EMERISS"){
-		SendDiscord(msg_discord_bot_cmd_dragons)
-	}
-	else if (unit_found = "YSONDRE"){
-		SendDiscord(msg_discord_bot_cmd_dragons)
-	}
-	else if (unit_found = "TAERAR"){
-		SendDiscord(msg_discord_bot_cmd_dragons)
-	}
-	else if (unit_found = "LETHON"){
-		SendDiscord(msg_discord_bot_cmd_dragons)
 	}
 	else {
 		SendDiscord("Couldn't find bot command for unit: " . unit_found . "!")

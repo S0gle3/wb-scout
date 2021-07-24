@@ -11,18 +11,17 @@ global wait_loading_screen:=18000                ; time in ms to wait on charact
 
 ;============================================================================================================
 ; Discord spam
-global discord_channel_spam:="world-boss-spam" ; "#coordination world" as to not confuse with warchief coordination
+global discord_channel_spam:="ahk-test-coordination" ; "#coordination world" as to not confuse with warchief coordination
 ;global discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 global msg_discord:="World Boss spawned: " 
 global spam_delay:=1000 ; spam delay in ms 
 global n_spam:=4    ; number of messages to send        
 
 ; Discord bot
-global discord_channel_bot:="#world-boss-bot-command"
+global discord_channel_bot:="#ahk-test-bot-pings"
 ;global discord_channel_bot:="#bot-pings"
-global msg_discord_bot_cmd_azuregos:="!startevent azure" 
+global msg_discord_bot_cmd_doomwalker:="!startevent doomwalker" 
 global msg_discord_bot_cmd_kazzak:="!startevent kazzak" 
-global msg_discord_bot_cmd_dragons:="!startevent four" 
 
 ; Discord scout compromised
 global msg_discord_scout_compromised:="Scout compromised? Status: "  

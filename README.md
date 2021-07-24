@@ -1,11 +1,11 @@
 # scout
 This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has been found.
 
-This is how the demo version works with Hogger streamable link: https://streamable.com/qww8fe
+This is how the demo version works: https://youtu.be/pXCjO0RzT7k
 
 Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while AFKing. 
 
-## DEMO mode vs MAINmode 
+## DEMO mode vs MAIN mode 
 The demo version sends discord message to party chat and alerts the Sogla's AHK Scout Bot Test Discord discord
 
 https://discord.gg/FvMxSR9w2j
@@ -18,7 +18,7 @@ enable_demo_mode := 0 ; Sends alerts to guild chat and main discord
 ```
 
 ## Setup
-This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://streamable.com/qww8fe (needs updating)
+This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://youtu.be/pXCjO0RzT7k 
 
 Step 1. Install autohotkey
 https://www.autohotkey.com/

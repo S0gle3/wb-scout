@@ -1,6 +1,6 @@
 ; Feel free to edit any of these
 ;===========================================================================================================
-global enable_demo_mode:= 1                     ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
+global enable_demo_mode:=1                     ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
                                                 ; if 0 writes to praxis discord
 
 global enable_log:=1                            ; if 1 writes to a log file, 0 to disable
@@ -13,11 +13,13 @@ global is_stay_logged_in:=1 ; if 1 runs AFK script after succesful scouting, if 
 global wait_loading_screen:=18000                ; time in ms to wait on character -> world loading screen
 
 ;Timing
-global num_cycles_movement = 12
-global sleep_cycle_duration = 5000
+global num_cycles_movement := 12
+global sleep_cycle_duration := 5000
+global num_cycles_relog := 100
 if (enable_demo_mode = 1){
-    num_cycles_movement = 3
-    sleep_cycle_duration = 1000
+    num_cycles_movement := 3
+    sleep_cycle_duration := 1000
+	num_cycles_relog := 7
 }
 
 ;============================================================================================================

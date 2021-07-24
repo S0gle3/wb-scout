@@ -59,7 +59,7 @@ while enable
     counter++
     
     ; Logout and back in to avoid random disconnects
-    if (Mod(counter,100) = 0 ){ ; 90
+    if (Mod(counter,num_cycles_relog) = 0 ){ 
         Logout()
         Sleep, 17000
         if (is_rogue=1){
@@ -72,7 +72,7 @@ while enable
         if (is_rogue=1){
             ; stealth
             ControlSend,, 1, ahk_id %wowid% 
-        }
+    }
     Sleep, 1500
     }
     else {

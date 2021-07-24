@@ -38,6 +38,7 @@ ProcessIPCCmd(){
             ExitApp	
             return
         }
+		return
     }
     if (cmd_str = "UnitIsDeadOrGhost"){
         AlertIngame("Has been Killed")

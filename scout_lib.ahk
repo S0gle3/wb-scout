@@ -30,6 +30,8 @@ ProcessIPCCmd(){
 		return
 	}
 	if (cmd_str = "UnitAffectingCombat"){
+		AlertIngame("In Combat")
+		Sleep 500
 		if (is_rogue=1){
 			AlertDiscordCompromised("In Combat")
 			Sleep 18000
@@ -38,7 +40,9 @@ ProcessIPCCmd(){
 		}
 	}
 	if (cmd_str = "UnitIsDeadOrGhost"){
-		AlertDiscordCompromised("Is Dead or Ghost")
+		AlertIngame("Has been Killed")
+		Sleep 500
+		AlertDiscordCompromised("Has been Killed")
 		Sleep 18000
 		ExitApp	
         return
@@ -51,7 +55,7 @@ ProcessIPCCmd(){
 	}
 	; Found NPC on Whitelist
 	; Alert
-	Alert(unit_found)
+	AlertDiscord(unit_found)
 	;
 	Sleep 5000
 	if (is_stay_logged_in=1){
@@ -63,15 +67,10 @@ ProcessIPCCmd(){
 }
 
 
-Alert(unit_found){	
-	AlertIngame(unit_found)
-	AlertDiscord(unit_found)
-}
-
-AlertIngame(unit_found){
+AlertIngame(message){
 	WinActivate, ahk_id %wowid%
 	Sleep, 1000
-	SendCmd("/guild " . msg_guild . unit_found)
+	SendCmd("/w Sogla " . msg_guild . message)
 	Sleep, 2000
 }
 

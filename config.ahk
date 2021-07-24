@@ -28,7 +28,7 @@ global msg_discord_bot_cmd_dragons:="!startevent four"
 global msg_discord_scout_compromised:="Scout compromised? Status: "  
 
 ; Ingame
-global msg_guild:="World Boss spawned: "
+global msg_guild:="SCOUT: "
 
 ;============================================================================================================
 ; Approved unitscan NPCs

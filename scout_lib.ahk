@@ -112,7 +112,19 @@ AlertDiscord(unit_found){
     {
         SendDiscord(msg_discord . unit_found)
         Sleep, spam_delay
+    }	
+	
+    if (unit_found = "DOOMWALKER"){
+		SendDiscordConfirmHereEveryone(msg_discord_everyone_doomwalker)
     }
+    else if (unit_found = "DOOM LORD KAZZAK"){
+		SendDiscordConfirmHereEveryone(msg_discord_everyone_kazzak)
+    }
+    else {
+        SendDiscordConfirmHereEveryone("@everyone")
+    }	
+    Sleep, 1000
+	
 }
 
 AlertDiscordCompromised(status) {
@@ -140,6 +152,15 @@ SendDiscord(msg){
     clipboard := msg
     Send, ^v
     Sleep 1000
+    Send, {Enter}
+}
+
+SendDiscordConfirmHereEveryone(msg){
+    clipboard := msg
+    Send, ^v
+    Sleep 5000
+    Send, {Enter}
+	Sleep 5000
     Send, {Enter}
 }
 

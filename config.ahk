@@ -29,9 +29,9 @@ if (enable_demo_mode = 0){
     discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 }
 ;global discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
-global msg_discord:="World Boss spawned: " 
+global msg_discord:="WORLD BOSS SPAWNED " 
 global spam_delay:=1000 ; spam delay in ms 
-global n_spam:=7    ; number of messages to send        
+global n_spam:=5    ; number of messages to send        
 
 ; Discord bot
 global discord_channel_bot:="#ahk-test-bot-pings"
@@ -40,6 +40,9 @@ if (enable_demo_mode = 0){
 }
 global msg_discord_bot_cmd_doomwalker:="!startevent doomwalker" 
 global msg_discord_bot_cmd_kazzak:="!startevent kazzak" 
+
+global msg_discord_everyone_doomwalker:="DOOMWALKER SPAWNED @everyone" 
+global msg_discord_everyone_kazzak:="KAZZAK SPAWNED @everyone" 
 
 ; Discord scout compromised
 global msg_discord_scout_compromised:="Scout compromised? Status: "  

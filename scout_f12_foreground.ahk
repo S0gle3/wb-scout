@@ -46,13 +46,13 @@ while enable
       }
       else {
         ControlSend,, {a down}, ahk_id %wowid%
-        Sleep 400
+        Sleep 350
         ControlSend,, {a up}, ahk_id %wowid%
-        Sleep 400
+        Sleep 350
         ControlSend,, {d down}, ahk_id %wowid%
-        Sleep 400
+        Sleep 350
         ControlSend,, {d up}, ahk_id %wowid%
-        Sleep 400
+        Sleep 350
       }
     }
     

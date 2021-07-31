@@ -92,19 +92,19 @@ AlertDiscord(unit_found){
     WinActivate, ahk_id %discord_id%
     Sleep, 3000	
 
-    SwitchChannel(discord_channel_bot)
-    Sleep, 1000
+    ;SwitchChannel(discord_channel_bot)
+    ;Sleep, 1000
     ; Which bot to start channel
-    if (unit_found = "DOOMWALKER"){
-        SendDiscord(msg_discord_bot_cmd_doomwalker)
-    }
-    else if (unit_found = "DOOM LORD KAZZAK"){
-        SendDiscord(msg_discord_bot_cmd_kazzak)
-    }
-    else {
-        SendDiscord("Couldn't find bot command for unit: " . unit_found . "!")
-    }	
-    Sleep, 1000
+    ;if (unit_found = "DOOMWALKER"){
+    ;    SendDiscord(msg_discord_bot_cmd_doomwalker)
+    ;}
+    ;else if (unit_found = "DOOM LORD KAZZAK"){
+    ;    SendDiscord(msg_discord_bot_cmd_kazzak)
+    ;}
+    ;else {
+    ;    SendDiscord("Couldn't find bot command for unit: " . unit_found . "!")
+    ;}	
+    ;Sleep, 1000
 
     SwitchChannel(discord_channel_spam)
     Sleep, 1000

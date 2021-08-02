@@ -145,16 +145,6 @@ AlertDiscordCompromised(status) {
     SendDiscord(msg_discord_scout_compromised . status)
 }
 
-Logout(){
-    if (use_macros = 1){
-        ControlSend,, 5, ahk_id %wowid%
-    }
-    else {
-        WinActivate, ahk_id %wowid%
-        SendCmd("/logout")
-    }
-}
-
 SendDiscord(msg){
     clipboard := msg
     Send, ^v
@@ -215,24 +205,42 @@ MoveCharacterOnGround(){
     Sleep, 2000
 }
 
+Logout(){
+    if (use_macros = 1){
+        ControlSend,, 5, ahk_id %wowid%
+    }
+    else {
+        WinActivate, ahk_id %wowid%
+        SendCmd("/logout")
+    }
+}
+
+Relog(){
+    Logout()
+    Sleep, 17000
+    if (is_rogue=1){
+        ; unstealth
+        ControlSend,, 1, ahk_id %wowid% 
+    }
+    Sleep, 15000
+    ControlSend,, {enter}, ahk_id %wowid% 
+    Sleep, %wait_loading_screen%        
+    if (is_rogue=1){
+        ; stealth
+        ControlSend,, 1, ahk_id %wowid% 
+}
+
 AntiAFKLoop(){
     iterate:=0
     while 1 {
-        ifWinExist, ahk_id %wowid%
-        {  
+        ifWinExist, ahk_id %wowid% {  
+            ; Avoid AFK by Moving Character
+            if (Mod(counter,num_cycles_movement) = 0 ){ ; 12
             if (is_rogue=1){
-                ControlSend,, {Space}, ahk_id %wowid%    
-                Sleep, 2000
+                MoveCharacterOnGround()
             }
             else {
-                ControlSend,, {a down}, ahk_id %wowid%
-                Sleep 500
-                ControlSend,, {a up}, ahk_id %wowid%
-                Sleep 500
-                ControlSend,, {d down}, ahk_id %wowid%
-                Sleep 500
-                ControlSend,, {d up}, ahk_id %wowid%
-                Sleep 500
+                MoveCharacterFlying()
             }
             
             WinActivate, ahk_id %wowid%
@@ -241,19 +249,7 @@ AntiAFKLoop(){
             iterate++
             
             if (Mod(iterate,11) = 0 ){
-                Logout()
-                Sleep, 17000
-                if (is_rogue=1){
-                    ; unstealth
-                    ControlSend,, 1, ahk_id %wowid% 
-                }
-                Sleep, 15000
-                ControlSend,, {enter}, ahk_id %wowid% 
-                Sleep, %wait_loading_screen%        
-                if (is_rogue=1){
-                    ; stealth
-                    ControlSend,, 1, ahk_id %wowid% 
-                }
+                Relog()
             }
         }
     }

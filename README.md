@@ -1,26 +1,24 @@
 # scout
 This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has been found.
 
-Libcopypaste: This is how the demo version works with Hogger streamable link: https://streamable.com/qww8fe
+This is how the demo version works: https://youtu.be/pXCjO0RzT7k
+
 Requires keyboard control, running discord and activated wow client. So must be run in the foreground! Best used while AFKing. 
 
-Square: Move cursor to WA square, press F10 to record square position and F12 to start
-Does NOT require keyboard control or focus. It does require the square to be visible
-Square streamable https://streamable.com/9qcmoq
+## DEMO mode vs MAIN mode 
+The demo version sends discord message to party chat and alerts the Sogla's AHK Scout Bot Test Discord discord
 
-
-## TEST version vs MAIN version
-
-The test version sends discord message to party chat and alerts the scout-bot-test-environment discord
-
-https://discord.gg/DXr2tAMvMG
+https://discord.gg/FvMxSR9w2j
 
 Do the setup once, then run demo version to try out the discord alerts and see how it works.
 
-global test_mode:=1 is enabled by default. Set to 0 when scouting world bosses
+Then you can run the main version when scouting world bosses by changing value 1 to 0. 
+```
+enable_demo_mode := 0 ; Sends alerts to guild chat and main discord
+```
 
 ## Setup
-This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://streamable.com/qww8fe
+This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://youtu.be/pXCjO0RzT7k 
 
 Step 1. Install autohotkey
 https://www.autohotkey.com/
@@ -28,8 +26,8 @@ https://www.autohotkey.com/
 (libcopypaste) Step 2. Install LibCopyPaste Addon
 LibCopyPaste-1.0: https://www.curseforge.com/wow/addons/libcopypaste
 
-I provided the classic `LibCopyPaste-1.0-v1.0.8-classic.zip` version in the folder. 
-Unzip the LibCopyPaste-1.0-v1.0.8-classic.zip and drag `/LibCopyPaste-1.0` folder into your interface/addons then **reload the game client** to load the addon.
+I provided the classic `LibCopyPaste-1.0-v1.0.10-classic.zip` version in the folder. 
+Unzip the LibCopyPaste-1.0-v1.0.10-classic.zip and drag `/LibCopyPaste-1.0` folder into your interface/addons then **reload the game client** to load the addon.
 
 Does it work?
 Run this command ingame. If there's a prompt to accept custom scripts, click yes.
@@ -38,12 +36,8 @@ This should popup a window with some text.
 /run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Install sucess', "LibCopyPaste installed successfully")
 ```
 
-(square prefered method) Step 2. Install Weakaura https://wago.io/X63V8KRyn
-or in WA_square.text
 
-You must bind /logout to 5. See macro setup below
-
-Step 3. Modify unitscan.lua 
+Step 3. Modify unitscan - unitscan.lua 
 I use a modified `unitscan.lua` file. 
 
 For simplicity sake I included my entire `/unitscan` folder so you can copy-paste replace everything!
@@ -74,11 +68,11 @@ Set `use_macros:=1` in `config.ahk`!
 Bind this macro to buttons 5 on your scout.
 
 5. Logout
-	```
-		/p Relogging on purpose. Brb in 1min
-		/raid Relogging on purpose. Brb in 1min
-		/logout
-	```
+    ```
+        /p Relogging on purpose. Brb in 1min
+        /raid Relogging on purpose. Brb in 1min
+        /logout
+    ```
 
 ## Usage
 Double-click `scout_f12_foreground.ahk` to load the script! It will show a confirm message if it's loaded.
@@ -95,13 +89,13 @@ Press CTRL+F12 to exit the script immediately.
 This script will not alert you if you die.
 
 For details what I changed in unitscan: 2 minor changes to `unitscan.lua` from the Praxis discord. 
-in `unitscan.lua` on line 23 I added 
+in `unitscan.lua` added 
 
 ```
 unitscan_discovered_unit_name = "no_unit_found"
 ```
 
-in `unitscan.lua` on line 52 I added 
+in `unitscan.lua` added 
 
 ```
 unitscan_discovered_unit_name = name

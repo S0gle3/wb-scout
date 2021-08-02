@@ -39,19 +39,29 @@ Scout:
 while enable
 {
   ifWinExist, ahk_id %wowid% 
-  {   
-    ; Load discovered_unit variable and decide to alert the boys or continue scouting	
-	if (use_libcopypaste = 1){
-		ProcessIPCCmd()
-	}
-	else {
-		ProcessSquare()
-	}
-	
-	; Do a jump    
-    if (Mod(counter,12) = 0 ){ ; 12
+  {     	
+    ; Load discovered_unit variable and decide to alert the boys or continue scouting
+    ProcessIPCCmd()
+    
+    ; Sleep
+    Sleep, 5000
+    
+    ; Do a jump    
+    if (Mod(counter,num_cycles_movement) = 0 ){ ; 12
+      if (is_rogue=1){
         ControlSend,, {Space}, ahk_id %wowid%    
         Sleep, 2000
+      }
+      else {
+        ControlSend,, {a down}, ahk_id %wowid%
+        Sleep 350
+        ControlSend,, {a up}, ahk_id %wowid%
+        Sleep 350
+        ControlSend,, {d down}, ahk_id %wowid%
+        Sleep 350
+        ControlSend,, {d up}, ahk_id %wowid%
+        Sleep 350
+      }
     }
     
     ; Sleep
@@ -64,7 +74,7 @@ while enable
     counter++
     
     ; Logout and back in to avoid random disconnects
-    if (test_mode = 0 and Mod(counter,100) = 0 ){ ; 90
+    if (Mod(counter,num_cycles_relog) = 0 ){ 
         Logout()
         Sleep, 17000
         if (is_rogue=1){
@@ -84,19 +94,19 @@ while enable
         if (is_rogue=1){
             ; stealth
             ControlSend,, 1, ahk_id %wowid% 
-        }
-		Sleep, 1500
+    }
+    Sleep, 1500
     }
     else {
-        Sleep, 5000
+        Sleep, sleep_cycle_duration
     }    
   }
   else
   {
-	Sleep 1000
-	AlertDiscordCompromised("Client closed")
-	Sleep 18000  
-	ExitApp  
+  Sleep 1000
+  AlertDiscordCompromised("Client closed")
+  Sleep 18000  
+  ExitApp  
   }
 }
 return

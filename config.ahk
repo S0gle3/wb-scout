@@ -8,7 +8,7 @@ global enable_log:=1                            ; if 1 writes to a log file, 0 t
 global use_macros:=0                           ; if 1 uses macros bound to 1 and 5, instead of typing commands, 0 to disable
 
 global is_rogue:=0 ; if 1 it sends 1 to press stealth when logging out/in
-global is_stay_logged_in:=0 ; if 1 runs AFK script after succesful scouting, if 0 closes the game client after alerting
+global is_stay_logged_in:=1 ; if 1 runs AFK script after succesful scouting, if 0 closes the game client after alerting
 
 global wait_loading_screen:=18000                ; time in ms to wait on character -> world loading screen
 
@@ -31,7 +31,7 @@ if (enable_demo_mode = 0){
 ;global discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 global msg_discord:="WORLD BOSS SPAWNED " 
 global spam_delay:=1000 ; spam delay in ms 
-global n_spam:=2    ; number of messages to send        
+global n_spam:=4    ; number of messages to send        
 
 ; Discord bot
 global discord_channel_bot:="#ahk-test-bot-pings"

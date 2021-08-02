@@ -47,25 +47,18 @@ while enable
         MoveCharacterFlying()
       }
     }
+
+    if (enable_duo_scout_mode=1 and Mod(counter,num_cycles_before_duo_swap)){
+      counter:=1 ; reset counter to 1
+      SwapCharacter()
+    }
     
     counter++
     
     ; Logout and back in to avoid random disconnects
     if (Mod(counter,num_cycles_relog) = 0 ){ 
-        Logout()
-        Sleep, 17000
-        if (is_rogue=1){
-            ; unstealth
-            ControlSend,, 1, ahk_id %wowid% 
-        }
-        Sleep, 15000
-        ControlSend,, {enter}, ahk_id %wowid% 
-        Sleep, %wait_loading_screen%        
-        if (is_rogue=1){
-            ; stealth
-            ControlSend,, 1, ahk_id %wowid% 
-    }
-    Sleep, 1500
+        Relog()
+        Sleep 1500
     }
     else {
         Sleep, sleep_cycle_duration

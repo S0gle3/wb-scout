@@ -215,6 +215,32 @@ Logout(){
     }
 }
 
+
+SwapCharacter(){
+    Logout()
+    Sleep, 17000
+    if (is_rogue=1){
+        ; unstealth
+        ControlSend,, 1, ahk_id %wowid% 
+    }
+    Sleep, 15000
+    if (is_next_character_down = 1){
+        ControlSend,, {down}, ahk_id %wowid% 
+        is_next_character_down:=0
+    }
+    else {
+        ControlSend,, {up}, ahk_id %wowid% 
+        is_next_character_down:=1
+    }
+    Sleep, 1000
+    ControlSend,, {enter}, ahk_id %wowid% 
+    Sleep, %wait_loading_screen%        
+    if (is_rogue=1){
+        ; stealth
+        ControlSend,, 1, ahk_id %wowid% 
+    }
+}
+
 Relog(){
     Logout()
     Sleep, 17000
@@ -228,14 +254,15 @@ Relog(){
     if (is_rogue=1){
         ; stealth
         ControlSend,, 1, ahk_id %wowid% 
+    }
 }
 
 AntiAFKLoop(){
     iterate:=0
     while 1 {
         ifWinExist, ahk_id %wowid% {  
-            ; Avoid AFK by Moving Character
-            if (Mod(counter,num_cycles_movement) = 0 ){ ; 12
+        ; Avoid AFK by Moving Character
+        if (Mod(counter,num_cycles_movement) = 0 ){ ; 12
             if (is_rogue=1){
                 MoveCharacterOnGround()
             }

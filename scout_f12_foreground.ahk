@@ -2,7 +2,12 @@
 
 ;===================================================================
 #SingleInstance force
-MsgBox, ,, Script loaded. Activate WoW and press F12 to start scouting!, 3
+if (enable_demo_mode=1) {
+	MsgBox, ,, Test Script loaded. Activate WoW and press F12 to start test scouting!, 5
+}
+if (enable_demo_mode=0) {
+ MsgBox, ,, LIVE Script loaded. Activate WoW and press F12 to start scouting!, 3
+}
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include scout_lib.ahk
 global wowid
@@ -37,43 +42,32 @@ while enable
     
     ; Sleep
     Sleep, 5000
-    
-    ; Do a jump    
-    if (Mod(counter,num_cycles_movement) = 0 ){ ; 12
-      if (is_rogue=1){
-        ControlSend,, {Space}, ahk_id %wowid%    
-        Sleep, 2000
-      }
-      else {
-        ControlSend,, {a down}, ahk_id %wowid%
-        Sleep 350
-        ControlSend,, {a up}, ahk_id %wowid%
-        Sleep 350
-        ControlSend,, {d down}, ahk_id %wowid%
-        Sleep 350
-        ControlSend,, {d up}, ahk_id %wowid%
-        Sleep 350
+
+    if (enable_duo_scout_mode=0){
+      ; Avoid AFK by Moving Character
+      if (Mod(counter,num_cycles_movement) = 0 ){ ; 12
+        if (is_rogue=1){
+          MoveCharacterOnGround()
+        }
+        else {
+          MoveCharacterFlying()
+        }
       }
     }
-    
+
     counter++
+
+    if (enable_duo_scout_mode=1){
+      if (Mod(counter,num_cycles_before_duo_swap)=0){
+        counter:=1 ; reset counter to 1
+        SwapCharacter()
+      }
+    }
     
     ; Logout and back in to avoid random disconnects
-    if (Mod(counter,num_cycles_relog) = 0 ){ 
-        Logout()
-        Sleep, 17000
-        if (is_rogue=1){
-            ; unstealth
-            ControlSend,, 1, ahk_id %wowid% 
-        }
-        Sleep, 15000
-        ControlSend,, {enter}, ahk_id %wowid% 
-        Sleep, %wait_loading_screen%        
-        if (is_rogue=1){
-            ; stealth
-            ControlSend,, 1, ahk_id %wowid% 
-    }
-    Sleep, 1500
+    if (enable_duo_scout_mode=0 and Mod(counter,num_cycles_relog) = 0 ){ 
+        Relog()
+        Sleep 1500
     }
     else {
         Sleep, sleep_cycle_duration

@@ -57,15 +57,25 @@ ProcessIPCCmd(){
         }
     }
     ; Found NPC on Whitelist
-    AlertDiscord(unit_found)
     ;
-    Sleep 5000
-    if (is_stay_logged_in=1){
-        WinActivate, ahk_id %wowid%
-        AntiAFKLoop()
+    if (enable_duo_scout_mode=1){
+        AlertDiscord(unit_found)
+        Sleep 5000
+        ; Disable duo scout mode and go scout other boss
+        enable_duo_scout_mode:=0
+        SwapCharacter()
+        return
     }
-    WinKill, ahk_id %wowid%
-    ExitApp	
+    else {
+        AlertDiscord(unit_found)
+        Sleep 5000
+        if (is_stay_logged_in=1){
+            WinActivate, ahk_id %wowid%
+            AntiAFKLoop()
+        }
+        WinKill, ahk_id %wowid%
+        ExitApp	
+    }
 }
 
 
@@ -92,19 +102,19 @@ AlertDiscord(unit_found){
     WinActivate, ahk_id %discord_id%
     Sleep, 3000	
 
-    ;SwitchChannel(discord_channel_bot)
-    ;Sleep, 1000
+    SwitchChannel(discord_channel_bot)
+    Sleep, 1000
     ; Which bot to start channel
-    ;if (unit_found = "DOOMWALKER"){
-    ;    SendDiscord(msg_discord_bot_cmd_doomwalker)
-    ;}
-    ;else if (unit_found = "DOOM LORD KAZZAK"){
-    ;    SendDiscord(msg_discord_bot_cmd_kazzak)
-    ;}
-    ;else {
-    ;    SendDiscord("Couldn't find bot command for unit: " . unit_found . "!")
-    ;}	
-    ;Sleep, 1000
+    if (unit_found = "DOOMWALKER"){
+        SendDiscord(msg_discord_bot_cmd_doomwalker)
+    }
+    else if (unit_found = "DOOM LORD KAZZAK"){
+        SendDiscord(msg_discord_bot_cmd_kazzak)
+    }
+    else {
+        SendDiscord("Couldn't find bot command for unit: " . unit_found . "!")
+    }	
+    Sleep, 1000
 
     SwitchChannel(discord_channel_spam)
     Sleep, 1000
@@ -136,16 +146,6 @@ AlertDiscordCompromised(status) {
     SwitchChannel(discord_channel_spam)
     Sleep, 1000
     SendDiscord(msg_discord_scout_compromised . status)
-}
-
-Logout(){
-    if (use_macros = 1){
-        ControlSend,, 5, ahk_id %wowid%
-    }
-    else {
-        WinActivate, ahk_id %wowid%
-        SendCmd("/logout")
-    }
 }
 
 SendDiscord(msg){
@@ -190,24 +190,87 @@ MyLog(str){
     FileAppend, [%A_DD%-%A_MM%-%A_Hour%:%A_Min%:%A_Sec%]: %str%`n, scout.log
 }
 
+MoveCharacterFlying(){
+    ControlSend,, {a down}, ahk_id %wowid%
+    Sleep 350
+    ControlSend,, {a up}, ahk_id %wowid%
+    Sleep 350
+    ControlSend,, {d down}, ahk_id %wowid%
+    Sleep 350
+    ControlSend,, {d up}, ahk_id %wowid%
+    Sleep 350
+}
+
+MoveCharacterOnGround(){
+    ControlSend,, {Space}, ahk_id %wowid%    
+    Sleep, 2000
+    ControlSend,, {Space}, ahk_id %wowid%    
+    Sleep, 2000
+}
+
+Logout(){
+    if (use_macros = 1){
+        ControlSend,, 5, ahk_id %wowid%
+    }
+    else {
+        WinActivate, ahk_id %wowid%
+        SendCmd("/logout")
+    }
+}
+
+
+SwapCharacter(){
+    Logout()
+    Sleep, 17000
+    if (is_rogue=1){
+        ; unstealth
+        ControlSend,, 1, ahk_id %wowid% 
+    }
+    Sleep, wait_character_screen
+    if (is_next_character_down = 1){
+        ControlSend,, {down}, ahk_id %wowid% 
+        is_next_character_down:=0
+    }
+    else {
+        ControlSend,, {up}, ahk_id %wowid% 
+        is_next_character_down:=1
+    }
+    Sleep, 1000
+    ControlSend,, {enter}, ahk_id %wowid% 
+    Sleep, %wait_loading_screen%        
+    if (is_rogue=1){
+        ; stealth
+        ControlSend,, 1, ahk_id %wowid% 
+    }
+}
+
+Relog(){
+    Logout()
+    Sleep, 17000
+    if (is_rogue=1){
+        ; unstealth
+        ControlSend,, 1, ahk_id %wowid% 
+    }
+    Sleep, wait_character_screen
+    ControlSend,, {enter}, ahk_id %wowid% 
+    Sleep, %wait_loading_screen%        
+    if (is_rogue=1){
+        ; stealth
+        ControlSend,, 1, ahk_id %wowid% 
+    }
+}
+
 AntiAFKLoop(){
     iterate:=0
     while 1 {
-        ifWinExist, ahk_id %wowid%
-        {  
+        ifWinExist, ahk_id %wowid% {  
+        ; Avoid AFK by Moving Character
+        if (Mod(counter,num_cycles_movement) = 0 ){ ; 12
             if (is_rogue=1){
-                ControlSend,, {Space}, ahk_id %wowid%    
-                Sleep, 2000
+                MoveCharacterOnGround()
             }
             else {
-                ControlSend,, {a down}, ahk_id %wowid%
-                Sleep 500
-                ControlSend,, {a up}, ahk_id %wowid%
-                Sleep 500
-                ControlSend,, {d down}, ahk_id %wowid%
-                Sleep 500
-                ControlSend,, {d up}, ahk_id %wowid%
-                Sleep 500
+                MoveCharacterFlying()
             }
             
             WinActivate, ahk_id %wowid%
@@ -216,19 +279,7 @@ AntiAFKLoop(){
             iterate++
             
             if (Mod(iterate,11) = 0 ){
-                Logout()
-                Sleep, 17000
-                if (is_rogue=1){
-                    ; unstealth
-                    ControlSend,, 1, ahk_id %wowid% 
-                }
-                Sleep, 15000
-                ControlSend,, {enter}, ahk_id %wowid% 
-                Sleep, %wait_loading_screen%        
-                if (is_rogue=1){
-                    ; stealth
-                    ControlSend,, 1, ahk_id %wowid% 
-                }
+                Relog()
             }
         }
     }

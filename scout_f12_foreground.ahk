@@ -38,21 +38,13 @@ while enable
     ; Sleep
     Sleep, 5000
     
-    ; Do a jump    
+    ; Avoid AFK by Moving Character
     if (Mod(counter,num_cycles_movement) = 0 ){ ; 12
       if (is_rogue=1){
-        ControlSend,, {Space}, ahk_id %wowid%    
-        Sleep, 2000
+        MoveCharacterOnGround()
       }
       else {
-        ControlSend,, {a down}, ahk_id %wowid%
-        Sleep 350
-        ControlSend,, {a up}, ahk_id %wowid%
-        Sleep 350
-        ControlSend,, {d down}, ahk_id %wowid%
-        Sleep 350
-        ControlSend,, {d up}, ahk_id %wowid%
-        Sleep 350
+        MoveCharacterFlying()
       }
     }
     

@@ -197,6 +197,24 @@ MyLog(str){
     FileAppend, [%A_DD%-%A_MM%-%A_Hour%:%A_Min%:%A_Sec%]: %str%`n, scout.log
 }
 
+MoveCharacterFlying(){
+    ControlSend,, {a down}, ahk_id %wowid%
+    Sleep 350
+    ControlSend,, {a up}, ahk_id %wowid%
+    Sleep 350
+    ControlSend,, {d down}, ahk_id %wowid%
+    Sleep 350
+    ControlSend,, {d up}, ahk_id %wowid%
+    Sleep 350
+}
+
+MoveCharacterOnGround(){
+    ControlSend,, {Space}, ahk_id %wowid%    
+    Sleep, 2000
+    ControlSend,, {Space}, ahk_id %wowid%    
+    Sleep, 2000
+}
+
 AntiAFKLoop(){
     iterate:=0
     while 1 {

@@ -1,6 +1,4 @@
 global repeated_fail_count:=0 
-global is_doomwalker_spawned:=0 
-global is_kazzak_spawned:=0 
 
 ProcessIPCCmd(){
     command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (UnitIsDeadOrGhost('player') and 'UnitIsDeadOrGhost' or unitscan_discovered_unit_name))"
@@ -61,7 +59,12 @@ ProcessIPCCmd(){
     ; Found NPC on Whitelist
     ;
     if (enable_duo_scout_mode=1){
-
+        AlertDiscord(unit_found)
+        Sleep 5000
+        ; Disable duo scout mode and go scout other boss
+        enable_duo_scout_mode:=0
+        SwapCharacter()
+        return
     }
     else {
         AlertDiscord(unit_found)
@@ -99,19 +102,19 @@ AlertDiscord(unit_found){
     WinActivate, ahk_id %discord_id%
     Sleep, 3000	
 
-    ;SwitchChannel(discord_channel_bot)
-    ;Sleep, 1000
+    SwitchChannel(discord_channel_bot)
+    Sleep, 1000
     ; Which bot to start channel
-    ;if (unit_found = "DOOMWALKER"){
-    ;    SendDiscord(msg_discord_bot_cmd_doomwalker)
-    ;}
-    ;else if (unit_found = "DOOM LORD KAZZAK"){
-    ;    SendDiscord(msg_discord_bot_cmd_kazzak)
-    ;}
-    ;else {
-    ;    SendDiscord("Couldn't find bot command for unit: " . unit_found . "!")
-    ;}	
-    ;Sleep, 1000
+    if (unit_found = "DOOMWALKER"){
+        SendDiscord(msg_discord_bot_cmd_doomwalker)
+    }
+    else if (unit_found = "DOOM LORD KAZZAK"){
+        SendDiscord(msg_discord_bot_cmd_kazzak)
+    }
+    else {
+        SendDiscord("Couldn't find bot command for unit: " . unit_found . "!")
+    }	
+    Sleep, 1000
 
     SwitchChannel(discord_channel_spam)
     Sleep, 1000
@@ -223,7 +226,7 @@ SwapCharacter(){
         ; unstealth
         ControlSend,, 1, ahk_id %wowid% 
     }
-    Sleep, 15000
+    Sleep, wait_character_screen
     if (is_next_character_down = 1){
         ControlSend,, {down}, ahk_id %wowid% 
         is_next_character_down:=0
@@ -248,7 +251,7 @@ Relog(){
         ; unstealth
         ControlSend,, 1, ahk_id %wowid% 
     }
-    Sleep, 15000
+    Sleep, wait_character_screen
     ControlSend,, {enter}, ahk_id %wowid% 
     Sleep, %wait_loading_screen%        
     if (is_rogue=1){

@@ -1,4 +1,6 @@
 global repeated_fail_count:=0 
+global is_doomwalker_spawned:=0 
+global is_kazzak_spawned:=0 
 
 ProcessIPCCmd(){
     command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (UnitIsDeadOrGhost('player') and 'UnitIsDeadOrGhost' or unitscan_discovered_unit_name))"
@@ -57,15 +59,20 @@ ProcessIPCCmd(){
         }
     }
     ; Found NPC on Whitelist
-    AlertDiscord(unit_found)
     ;
-    Sleep 5000
-    if (is_stay_logged_in=1){
-        WinActivate, ahk_id %wowid%
-        AntiAFKLoop()
+    if (enable_duo_scout_mode=1){
+
     }
-    WinKill, ahk_id %wowid%
-    ExitApp	
+    else {
+        AlertDiscord(unit_found)
+        Sleep 5000
+        if (is_stay_logged_in=1){
+            WinActivate, ahk_id %wowid%
+            AntiAFKLoop()
+        }
+        WinKill, ahk_id %wowid%
+        ExitApp	
+    }
 }
 
 

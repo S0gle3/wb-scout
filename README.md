@@ -1,5 +1,5 @@
 # scout
-This script will AFK scout for you and write in guild chat + discord once a unit on unitscan has been found.
+This script will AFK scout for you and write in discord once a world boss on unitscan has been found.
 
 This is how the demo version works: https://youtu.be/pXCjO0RzT7k
 

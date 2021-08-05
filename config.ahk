@@ -1,6 +1,6 @@
 ; Feel free to edit any of these
 ;===========================================================================================================
-global enable_demo_mode:=0        ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
+global enable_demo_mode:=1        ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
                                   ; if 0 writes to praxis discord
 
 global enable_duo_scout_mode:=0   ; enables/disables both scouting of 2 bosses, read README.md on how it works
@@ -22,7 +22,7 @@ global sleep_cycle_duration := 5000 ; 5000
 global num_cycles_relog := 80 ; 80
 if (enable_demo_mode = 1){
     num_cycles_movement := 5 ; 5
-    sleep_cycle_duration := 1000 ; 1000
+    sleep_cycle_duration := 500 ; 1000
 	num_cycles_relog := 10 ; 10
 }
 ;Timing Duo Swap

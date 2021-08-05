@@ -37,7 +37,7 @@ while enable
 {
   ifWinExist, ahk_id %wowid% 
   {     	
-    ; Load discovered_unit variable and decide to alert the boys or continue scouting
+    ; Load discovered_unit variable and decide to alert the boys
     ProcessIPCCmd()
     
     ; Sleep

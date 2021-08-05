@@ -17,6 +17,18 @@ Then you can run the main version when scouting world bosses by changing value 1
 enable_demo_mode := 0 ; Sends alerts to guild chat and main discord
 ```
 
+## Duo scout mode
+```
+global enable_duo_scout_mode:=0 ; enables/disables both scouting of 2 bosses, set to 1 to enable
+```
+Bot will scout for 1-2mins at first boss then swap to character down on char select screen.
+Character list has to look like below
+```
+. Character screen
+├── character at world boss - Run script here
+└── character at other boss
+```
+
 ## Setup
 This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://youtu.be/pXCjO0RzT7k 
 

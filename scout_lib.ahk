@@ -1,6 +1,6 @@
 global repeated_fail_count:=0 
 
-ProcessIPCCmd(){
+ProcessIPCCmd(is_logging_out:=0){
     command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (UnitIsDeadOrGhost('player') and 'UnitIsDeadOrGhost' or unitscan_discovered_unit_name))"
     ; in combat?
     ;  	yes -> "UnitAffectingCombat"
@@ -58,17 +58,21 @@ ProcessIPCCmd(){
     }
     ; Found NPC on Whitelist
     ;
+    if (is_logging_out=1){ ; sent from SwapCharacter() after /logout
+        WinActivate, ahk_id %wowid%
+        Send, {Esc} ; stop logout
+    }
     if (enable_duo_scout_mode=1){
         AlertDiscord(unit_found)
-        Sleep 5000
+        Sleep 2000
         ; Disable duo scout mode and go scout other boss
         enable_duo_scout_mode:=0
-        SwapCharacter()
-        return
+        SwapCharacter(0) ; swap character without checking to avoid infinite loop
+        return 1
     }
     else {
         AlertDiscord(unit_found)
-        Sleep 5000
+        Sleep 2000
         if (is_stay_logged_in=1){
             WinActivate, ahk_id %wowid%
             AntiAFKLoop()
@@ -219,9 +223,18 @@ Logout(){
 }
 
 
-SwapCharacter(){
+SwapCharacter(check_while_logout:=1){
     Logout()
-    Sleep, 17000
+    if (check_while_logout=1){
+        Sleep, 13600 ; 17000 - ProcessIPCCmd sum of sleeps (3400)
+        found_something := ProcessIPCCmd(1)
+    }
+    else {
+        Sleep, 17000
+    }
+    if (found_something){
+        return ; discord alerted, logout cancelled
+    }
     if (is_rogue=1){
         ; unstealth
         ControlSend,, 1, ahk_id %wowid% 
@@ -246,7 +259,12 @@ SwapCharacter(){
 
 Relog(){
     Logout()
-    Sleep, 17000
+    Sleep, 13600 ; 17000 - ProcessIPCCmd sum of sleeps (3400)
+    found_something := ProcessIPCCmd(true)
+    if (found_something){
+        ; should never reach this part if something found, either exitapp or anti-afk loop
+        return ; discord alerted, logout cancelled
+    }
     if (is_rogue=1){
         ; unstealth
         ControlSend,, 1, ahk_id %wowid% 

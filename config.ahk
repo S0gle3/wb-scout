@@ -43,7 +43,7 @@ if (enable_demo_mode = 0){
 ;global discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 global msg_discord:="WORLD BOSS SPAWNED " 
 global spam_delay:=1000 ; spam delay in ms 
-global n_spam:=4    ; number of messages to send        
+global n_spam:=3    ; number of messages to send        
 
 ; Discord bot
 global discord_channel_bot:="#ahk-test-bot-pings"

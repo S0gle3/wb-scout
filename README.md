@@ -90,20 +90,15 @@ You can press F12 to disable the script but it will finish the scout loop.
 
 Press CTRL+F12 to exit the script immediately.
 
-!Every 30mins or so this script will relog your character for 1min to avoid random disconnects.
+!Every 20mins or so this script will relog your character for 1min to avoid random disconnects.
+
+If you get in combat or die the script will alert ingame/discord.
 
 ## Notes
-This script will not alert you if you die.
 
-For details what I changed in unitscan: 2 minor changes to `unitscan.lua` from the Praxis discord. 
+For details what I changed in unitscan: 2 minor changes to `unitscan.lua`. 
 in `unitscan.lua` added 
-
 ```
 unitscan_discovered_unit_name = "no_unit_found"
-```
-
-in `unitscan.lua` added 
-
-```
 unitscan_discovered_unit_name = name
 ```

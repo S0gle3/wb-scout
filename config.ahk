@@ -40,7 +40,6 @@ global discord_channel_spam:="ahk-test-coordination"
 if (enable_demo_mode = 0){
     discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 }
-;global discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 global msg_discord:="WORLD BOSS SPAWNED " 
 global spam_delay:=1000 ; spam delay in ms 
 global n_spam:=3    ; number of messages to send        

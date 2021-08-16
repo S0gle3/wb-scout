@@ -113,7 +113,8 @@ AlertDiscord(unit_found){
     Sleep, 1000
     ; Which bot to start channel
     if (unit_found = "DOOMWALKER"){
-        SendDiscord(msg_discord_bot_cmd_doomwalker)
+        ; SendDiscord(msg_discord_bot_cmd_doomwalker)
+		Sleep, 500
     }
     else if (unit_found = "DOOM LORD KAZZAK"){
         SendDiscord(msg_discord_bot_cmd_kazzak)
@@ -132,7 +133,8 @@ AlertDiscord(unit_found){
     }	
 	
     if (unit_found = "DOOMWALKER"){
-		SendDiscordConfirmHereEveryone(msg_discord_everyone_doomwalker)
+		SendDiscord("DOOMWALKER SPAWNED?")
+		SendDiscordScreencap()		
     }
     else if (unit_found = "DOOM LORD KAZZAK"){
 		SendDiscordConfirmHereEveryone(msg_discord_everyone_kazzak)
@@ -141,7 +143,6 @@ AlertDiscord(unit_found){
         SendDiscordConfirmHereEveryone("@everyone")
     }	
     Sleep, 1000
-	
 }
 
 AlertDiscordCompromised(status) {
@@ -159,6 +160,20 @@ SendDiscord(msg){
     clipboard := msg
     Send, ^v
     Sleep 1000
+    Send, {Enter}
+}
+
+SendDiscordScreencap(){
+    WinActivate, ahk_id %wowid%
+	Sleep, 2000
+	clipboard := "img"
+	Send {Alt Down}{PrintScreen}{Alt Up}
+    Sleep 1000
+	WinRestore, ahk_id %discord_id%
+    WinMaximize , ahk_id %discord_id%
+    WinActivate, ahk_id %discord_id%
+	Send, ^v
+    Sleep 2000
     Send, {Enter}
 }
 

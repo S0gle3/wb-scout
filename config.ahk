@@ -1,6 +1,6 @@
 ; Feel free to edit any of these
 ;===========================================================================================================
-global enable_demo_mode:=0        ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
+global enable_demo_mode:=1        ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
                                   ; if 0 writes to praxis discord
 
 global enable_duo_scout_mode:=0   ; enables/disables both scouting of 2 bosses, read README.md on how it works
@@ -51,7 +51,7 @@ global discord_channel_bot:="#ahk-test-bot-pings"
 if (enable_demo_mode = 0){
     discord_channel_bot:="#bot-pings"
 }
-global msg_discord_bot_cmd_doomwalker:="!startevent doomwalker" 
+global msg_discord_bot_cmd_doomwalker:="!startevent DOOM" 
 global msg_discord_bot_cmd_kazzak:="!startevent kazzak" 
 
 global msg_discord_everyone_doomwalker:="DOOMWALKER SPAWNED @everyone" 

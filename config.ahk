@@ -5,8 +5,6 @@ global enable_demo_mode:=1        ; if 1 enables demo mode, sped up version of s
 
 global enable_duo_scout_mode:=0   ; enables/disables both scouting of 2 bosses, read README.md on how it works
                                   ; if 0 disables and only scouts 1 boss
-								  
-global scout_while_ghost:=1		  ; scout while ghost. If 0 will alert discord is dead
 
 global enable_log:=1              ; if 1 enables duo scouting
 

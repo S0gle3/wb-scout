@@ -2,9 +2,6 @@ global repeated_fail_count:=0
 
 ProcessIPCCmd(is_logging_out:=0){
     command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (UnitIsDeadOrGhost('player') and 'UnitIsDeadOrGhost' or unitscan_discovered_unit_name))"
-	if (scout_while_ghost = 1){
-		command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (unitscan_discovered_unit_name))"
-	}
     ; in combat?
     ;  	yes -> "UnitAffectingCombat"
     ; 	no -> am i ghost or dead?

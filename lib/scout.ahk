@@ -231,7 +231,7 @@ MoveCharacterOnGround(){
 }
 
 Logout(){
-    if (use_macros = 1){
+    if (scout_relog_in_background = 1){
         ControlSend,, 5, ahk_id %wowid%
     }
     else {

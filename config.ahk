@@ -8,8 +8,6 @@ global enable_duo_scout_mode:=0   ; enables/disables both scouting of 2 bosses, 
 
 global enable_log:=1              ; if 1 enables duo scouting
 
-global use_macros:=0             	 ; if 1 uses macros bound to 1 and 5, instead of typing commands, 0 to disable
-
 global is_rogue:=0 ; if 1 it sends 1 to press stealth when logging out/in
 global is_stay_logged_in:=1 ; if 1 runs AFK script after succesful scouting, if 0 closes the game client after alerting
 
@@ -36,9 +34,8 @@ if (enable_demo_mode = 1){
 global scout_relog_in_background:=1  ; Relogs character like duo scout mode and skips IPCP (without input from copypastelib)
 									 ;  must have /logout macro bound to 5
 									 ;  if enable_duo_scout_mode=0 relogs to avoid afk kick
-									 ;	if enable_duo_scout_mode=1 relogs between characters
+									 ;	if enable_duo_scout_mode=1 relogs between characters									
 if (scout_relog_in_background = 1){
-	use_macros:=1
 	if (enable_demo_mode = 0){
 		num_cycles_before_duo_swap:=9
 		num_cycles_movement:=30 

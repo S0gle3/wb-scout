@@ -1,8 +1,8 @@
 #SingleInstance force
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include config.ahk
-#include msg_box.ahk
-#include scout_lib.ahk
+#include lib\msg_box.ahk
+#include lib\scout.ahk
 ;===================================================================
 SetKeyDelay, 0
 

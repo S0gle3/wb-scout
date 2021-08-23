@@ -29,6 +29,13 @@ Character list has to look like below
 └── character at other boss
 ```
 
+## Scout in background
+```
+global scout_in_background:=1  ; Relogs character like duo scout mode and skips IPCP (without input from copypastelib)
+```
+Runs anti-afk script for your character while scouting single boss or duo boss (set with `enable_duo_scout_mode`).
+Requires manually alerting discord but does not require window focus.
+
 ## Setup
 This video shows the demo version and gives you an idea of how it should look like! Streamable link: https://youtu.be/pXCjO0RzT7k 
 
@@ -60,7 +67,7 @@ Run this command ingame. If it prints "nil" it is incorrect. If it prints "no_un
 ```
 
 ## (optional) Config.ahk
-A. Edit config file `config.ahk` to your liking. It works out of the box! 
+A. Edit config file `config.ahk` to your liking. It works out of the box!*
 
 Each line has a comment saying what it does.
 
@@ -102,3 +109,6 @@ in `unitscan.lua` added
 unitscan_discovered_unit_name = "no_unit_found"
 unitscan_discovered_unit_name = name
 ```
+
+*enable_demo_mode needs to be set to 0 to alert Praxis discord ;)
+

@@ -1,6 +1,6 @@
 ; Feel free to edit any of these
 ;===========================================================================================================
-global enable_demo_mode:=1        ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
+global enable_demo_mode:=0        ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
                                   ; if 0 writes to praxis discord
 
 global enable_duo_scout_mode:=0   ; enables/disables both scouting of 2 bosses, read README.md on how it works
@@ -26,43 +26,24 @@ global wait_character_screen:=9000 ; time in ms to wait on world -> character lo
 global num_cycles_movement := 22 ; 3
 global sleep_cycle_duration := 5000 ; 5000
 global num_cycles_relog := 80 ; 80
-if (enable_demo_mode = 1){
-    num_cycles_movement := 5 ; 5
-    sleep_cycle_duration := 500 ; 1000
-	num_cycles_relog := 10 ; 10
-}
+
 ;Timing Duo Swap
 global num_cycles_before_duo_swap:= 6 ; enable_duo_scout_mode must be set to 1 (enabled)
                                       ; must be true num_cycles_before_duo_swap < num_cycles_relog
 
-if (enable_demo_mode = 1){
-    num_cycles_before_duo_swap:= 3 ; 3 
-}
-									
-if (scout_in_background = 1){
-	if (enable_demo_mode = 0){
-		num_cycles_before_duo_swap:=15
-		num_cycles_movement:=33 
-		num_cycles_relog:=120 
-	}	
-}
 
 ; Discord options
 ;============================================================================================================
 ; Discord spam
 global discord_channel_spam:="ahk-test-coordination"
-if (enable_demo_mode = 0){
-    discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
-}
+
 global msg_discord:="WORLD BOSS SPAWNED " 
 global spam_delay:=1000 ; spam delay in ms 
 global n_spam:=3    ; number of messages to send        
 
 ; Discord bot
 global discord_channel_bot:="#ahk-test-bot-pings"
-if (enable_demo_mode = 0){
-    discord_channel_bot:="#bot-pings"
-}
+
 global msg_discord_bot_cmd_doomwalker:="!startevent DOOM" 
 global msg_discord_bot_cmd_kazzak:="!startevent kazzak" 
 
@@ -74,10 +55,34 @@ global msg_discord_scout_compromised:="Scout compromised? Status: "
 
 ; Ingame
 global msg_ingame:="/w Sogla TEST_SCOUT: " ; must have space at the end
-if (enable_demo_mode = 0){
-   msg_ingame:="/guild SCOUT: "
-}
+
 
 ;============================================================================================================
 ; Approved unitscan NPCs
 global whitelist_NPC :=["DOOMWALKER" ,"DOOM LORD KAZZAK"] ; ALL CAPS
+
+;============================================================================================================
+; Push Options
+push_options(){
+	if (enable_demo_mode = 0){
+		discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
+		discord_channel_bot:="#bot-pings"
+	   msg_ingame:="/guild SCOUT: "
+	}
+	
+	if (enable_demo_mode = 1){
+		num_cycles_movement := 5 ; 5
+		sleep_cycle_duration := 500 ; 1000
+		num_cycles_relog := 10 ; 10
+		num_cycles_before_duo_swap:= 3 ; 3 
+	}
+	
+	if (scout_in_background = 1){
+		if (enable_demo_mode = 0){
+			num_cycles_before_duo_swap:=20
+			num_cycles_movement:=50 
+			num_cycles_relog:=120
+		}	
+	}
+}
+push_options()

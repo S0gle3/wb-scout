@@ -1,9 +1,9 @@
 ; Feel free to edit any of these
 ;===========================================================================================================
-global enable_demo_mode:=0        ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
+global enable_demo_mode:=1        ; if 1 enables demo mode, sped up version of scout, uses test discord, party chat for alerts
                                   ; if 0 writes to praxis discord
 
-global enable_duo_scout_mode:=1   ; enables/disables both scouting of 2 bosses, read README.md on how it works
+global enable_duo_scout_mode:=0   ; enables/disables both scouting of 2 bosses, read README.md on how it works
                                   ; if 0 disables and only scouts 1 boss
 
 global enable_log:=1              ; if 1 enables duo scouting
@@ -13,10 +13,9 @@ global use_macros:=0             	 ; if 1 uses macros bound to 1 and 5, instead 
 global is_rogue:=0 ; if 1 it sends 1 to press stealth when logging out/in
 global is_stay_logged_in:=1 ; if 1 runs AFK script after succesful scouting, if 0 closes the game client after alerting
 
+;Timing
 global wait_loading_screen:=13000 ; time in ms to wait on character -> world loading screen
 global wait_character_screen:=9000 ; time in ms to wait on world -> character loading screen
-
-;Timing
 global num_cycles_movement := 22 ; 3
 global sleep_cycle_duration := 5000 ; 5000
 global num_cycles_relog := 80 ; 80

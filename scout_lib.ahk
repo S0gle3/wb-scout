@@ -1,6 +1,9 @@
 global repeated_fail_count:=0 
 
 ProcessIPCCmd(is_logging_out:=0){
+	if (scout_relog_in_background = 1){
+	   return 	; skip IPC
+	}
     command_str := "/run local LibCopyPaste = LibStub('LibCopyPaste-1.0');LibCopyPaste:Copy('Discovered Unit', UnitAffectingCombat('player') and 'UnitAffectingCombat' or (UnitIsDeadOrGhost('player') and 'UnitIsDeadOrGhost' or unitscan_discovered_unit_name))"
     ; in combat?
     ;  	yes -> "UnitAffectingCombat"

@@ -1,6 +1,6 @@
 live_warning:="LIVE Script loaded!"
 if (enable_demo_mode=1) {
-	live_warning:="Test Script loaded."
+	live_warning:="Test Script loaded. Press F12 and trigger unitscan manually by adding any NPC with `/unitscan x`"
 }
 scout_in_background_warning:=""
 if (scout_in_background=1) {
@@ -9,6 +9,9 @@ if (scout_in_background=1) {
 msg_box_txt =
 (
 {}
+
+Double-check if /unitscan shows DOOMWALKER and/or DOOM LORD KAZZAK 
+Add with /unitscan DOOMWALKER if needed
 
 To Begin Scouting:   
 	1. Press F12 to start/pause scouting

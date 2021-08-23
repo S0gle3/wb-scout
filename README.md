@@ -66,6 +66,11 @@ Run this command ingame. If it prints "nil" it is incorrect. If it prints "no_un
 /script print(unitscan_discovered_unit_name)
 ```
 
+## EZ Start bot 
+start a `launch_live_.*.ahk`
+
+or go into config.ahk and edit options yourself and start `scout_f12_foreground.ahk`
+
 ## (optional) Config.ahk
 A. Edit config file `config.ahk` to your liking. It works out of the box!*
 

@@ -5,12 +5,21 @@ global enable_demo_mode:=1        ; if 1 enables demo mode, sped up version of s
 
 global enable_duo_scout_mode:=0   ; enables/disables both scouting of 2 bosses, read README.md on how it works
                                   ; if 0 disables and only scouts 1 boss
-
-global enable_log:=1              ; if 1 enables duo scouting
-
+								  
+global is_next_character_down:=1 ; if 1 swapping characters pressed down arrow key on char select
+                                 ; if 0 presses up arrow key							
+								  
+global scout_in_background:=0  ; Relogs character like duo scout mode and skips IPCP (without input from copypastelib)
+									 ;  must have /logout macro bound to 5
+									 ;  if enable_duo_scout_mode=0 relogs to avoid afk kick
+									 ;	if enable_duo_scout_mode=1 relogs between characters
+									 
+global enable_log:=1              ; if 1 enables logging to scout.log
 global is_rogue:=0 ; if 1 it sends 1 to press stealth when logging out/in
 global is_stay_logged_in:=1 ; if 1 runs AFK script after succesful scouting, if 0 closes the game client after alerting
 
+; Advanced options below
+;===========================================================================================================
 ;Timing
 global wait_loading_screen:=13000 ; time in ms to wait on character -> world loading screen
 global wait_character_screen:=9000 ; time in ms to wait on world -> character loading screen
@@ -25,16 +34,11 @@ if (enable_demo_mode = 1){
 ;Timing Duo Swap
 global num_cycles_before_duo_swap:= 6 ; enable_duo_scout_mode must be set to 1 (enabled)
                                       ; must be true num_cycles_before_duo_swap < num_cycles_relog
-global is_next_character_down:=1 ; if 1 swapping characters pressed down arrow key on char select
-                                 ; if 0 presses up arrow key
+
 if (enable_demo_mode = 1){
     num_cycles_before_duo_swap:= 3 ; 3 
 }
-
-global scout_in_background:=1  ; Relogs character like duo scout mode and skips IPCP (without input from copypastelib)
-									 ;  must have /logout macro bound to 5
-									 ;  if enable_duo_scout_mode=0 relogs to avoid afk kick
-									 ;	if enable_duo_scout_mode=1 relogs between characters									
+									
 if (scout_in_background = 1){
 	if (enable_demo_mode = 0){
 		num_cycles_before_duo_swap:=9
@@ -43,6 +47,7 @@ if (scout_in_background = 1){
 	}	
 }
 
+; Discord options
 ;============================================================================================================
 ; Discord spam
 global discord_channel_spam:="ahk-test-coordination"

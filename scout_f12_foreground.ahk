@@ -1,26 +1,27 @@
-#include config.ahk
-
-;===================================================================
 #SingleInstance force
-if (enable_demo_mode=1) {
-	MsgBox, ,, Test Script loaded. Activate WoW and press F12 to start test scouting!, 5
-}
-if (enable_demo_mode=0) {
- MsgBox, ,, LIVE Script loaded. Activate WoW and press F12 to start scouting!, 3
-}
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+#include config.ahk
+#include msg_box.ahk
 #include scout_lib.ahk
-global wowid
-WinGet, wowid, ID, World of Warcraft
+;===================================================================
 SetKeyDelay, 0
 
-global counter:=0
+global wowid
+WinGet, wowid, ID, World of Warcraft
+
+
+if !wowid{
+    MsgBox, World of Warcraft not found!
+    ExitApp
+}
 
 global discord_id:=WinExist("ahk_exe Discord.exe")
 if !discord_id{
-    MsgBox, Discord not open;
+    MsgBox, Discord not found!
     ExitApp
 }
+
+MsgBox, 0, , % msg_box_txt
 
 ^F12:: 
     ExitApp
@@ -30,6 +31,10 @@ $F12::
 if (enable := !enable)
   setTimer, Scout, -1
 return
+
+;===================================================================
+
+global counter:=0
 
 ; Scout Loop
 Scout:                                      

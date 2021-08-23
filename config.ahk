@@ -41,9 +41,9 @@ if (enable_demo_mode = 1){
 									
 if (scout_in_background = 1){
 	if (enable_demo_mode = 0){
-		num_cycles_before_duo_swap:=9
-		num_cycles_movement:=30 
-		num_cycles_relog:=100 
+		num_cycles_before_duo_swap:=15
+		num_cycles_movement:=33 
+		num_cycles_relog:=120 
 	}	
 }
 

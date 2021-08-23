@@ -31,11 +31,11 @@ if (enable_demo_mode = 1){
     num_cycles_before_duo_swap:= 3 ; 3 
 }
 
-global scout_relog_in_background:=1  ; Relogs character like duo scout mode and skips IPCP (without input from copypastelib)
+global scout_in_background:=1  ; Relogs character like duo scout mode and skips IPCP (without input from copypastelib)
 									 ;  must have /logout macro bound to 5
 									 ;  if enable_duo_scout_mode=0 relogs to avoid afk kick
 									 ;	if enable_duo_scout_mode=1 relogs between characters									
-if (scout_relog_in_background = 1){
+if (scout_in_background = 1){
 	if (enable_demo_mode = 0){
 		num_cycles_before_duo_swap:=9
 		num_cycles_movement:=30 

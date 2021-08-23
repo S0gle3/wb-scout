@@ -67,7 +67,7 @@ push_options(){
 	if (enable_demo_mode = 0){
 		discord_channel_spam:="#coordination world" ; "#coordination world" as to not confuse with warchief coordination
 		discord_channel_bot:="#bot-pings"
-	   msg_ingame:="/guild SCOUT: "
+		msg_ingame:="/guild SCOUT: "
 	}
 	
 	if (enable_demo_mode = 1){
@@ -79,7 +79,7 @@ push_options(){
 	
 	if (scout_in_background = 1){
 		if (enable_demo_mode = 0){
-			num_cycles_before_duo_swap:=20
+			num_cycles_before_duo_swap:=8
 			num_cycles_movement:=50 
 			num_cycles_relog:=120
 		}	

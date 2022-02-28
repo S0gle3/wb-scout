@@ -8,7 +8,7 @@ Requires keyboard control, running discord and activated wow client. So must be 
 ## DEMO mode vs MAIN mode 
 The demo version sends discord message to party chat and alerts the Sogla's AHK Scout Bot Test Discord discord
 
-https://discord.gg/FvMxSR9w2j
+<s>https://discord.gg/FvMxSR9w2j</s>
 
 Do the setup once, then run demo version to try out the discord alerts and see how it works.
 
